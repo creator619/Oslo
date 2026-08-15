@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oslo Kalandok - Útinaplóm</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b132b">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet.js Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="decor-blob blob-1"></div>
+    <div class="decor-blob blob-2"></div>
+    <div class="decor-blob blob-3"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <span class="badge">Velkommen til Oslo 🇳🇴</span>
+            <h1>Oslo Kalandok</h1>
+            <p class="subtitle">Fedezd fel a város csodáit, tervezd meg a napjaidat és örökítsd meg a legszebb pillanatokat!</p>
+            
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span class="progress-label">Felfedezés állása</span>
+                    <span class="progress-percentage" id="progress-text">0% (0 / 8)</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Interactive Leaflet Map Section -->
+        <section class="map-section">
+            <h2 class="section-title">Interaktív Térkép</h2>
+            <div id="map"></div>
+        </section>
+
+        <!-- Main Tab Navigation -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchMainTab('itinerary')">Útiterv & Látnivalók</button>
+            <button class="tab-btn" onclick="switchMainTab('checklist')">Úti Tippek & Csekklista</button>
+        </div>
+
+        <!-- Tab 1: Itinerary and Sights -->
+        <div id="tab-itinerary" class="tab-content active">
+            <!-- Day Filter Tabs -->
+            <div class="day-filters">
+                <button class="filter-btn active" onclick="filterDay('all')">Minden látnivaló</button>
+                <button class="filter-btn" onclick="filterDay(1)">1. Nap: Belváros</button>
+                <button class="filter-btn" onclick="filterDay(2)">2. Nap: Múzeumok félszigete</button>
+                <button class="filter-btn" onclick="filterDay(3)">3. Nap: Parkok & Panoráma</button>
+            </div>
+
+            <div class="sights-grid" id="sights-grid">
+                <!-- Dynamic cards here -->
+            </div>
+        </div>
+
+        <!-- Tab 2: Useful info & Packing checklist -->
+        <div id="tab-checklist" class="tab-content">
+            <div class="info-checklist-grid">
+                <!-- Packing Checklist -->
+                <div class="checklist-card">
+                    <h3 class="card-heading">🧳 Úti Ellenőrző Lista</h3>
+                    <p class="card-subheading">Készülj fel az utazásra, pipáld ki amit már bepakoltál!</p>
+                    <div class="checklist-items" id="packing-checklist">
+                        <!-- Dynamic checklist -->
+                    </div>
+                    <div class="checklist-add-form">
+                        <input type="text" id="new-item-input" placeholder="Új dolog hozzáadása...">
+                        <button onclick="addChecklistItem()">Hozzáad</button>
+                    </div>
+                </div>
+
+                <!-- Useful Oslo info -->
+                <div class="info-card">
+                    <h3 class="card-heading">ℹ️ Hasznos Oslói Tudnivalók</h3>
+                    <ul class="info-list">
+                        <li>
+                            <strong class="info-highlight">🚌 Közlekedés:</strong> Töltsd le a <strong>Ruter</strong> appot a jegyekhez és útvonaltervezéshez. A zónajegyek a metróra (T-bane), villamosra (Trikk), buszokra és kompokra is érvényesek.
+                        </li>
+                        <li>
+                            <strong class="info-highlight">💳 Fizetés:</strong> Norvégia szinte teljesen készpénzmentes. Mindenhol (még a nyilvános wc-kben is) tudsz fizetni kártyával vagy telefonnal. Készpénzt felesleges váltani.
+                        </li>
+                        <li>
+                            <strong class="info-highlight">💧 Ivóvíz:</strong> A csapvíz Norvégiában rendkívül tiszta és finom. Vigyél magaddal kulacsot, és töltsd újra bárhol!
+                        </li>
+                        <li>
+                            <strong class="info-highlight">☔ Időjárás:</strong> Az időjárás gyorsan változhat (szél, eső, napsütés egymás után). Öltözz rétegesen, és mindig legyen nálad esőkabát!
+                        </li>
+                        <li>
+                            <strong class="info-highlight">🚨 Vészhívók:</strong> Mentők: 113, Rendőrség: 112, Tűzoltók: 110.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for viewing full memory image -->
+    <div class="modal" id="image-modal">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Bezárás">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="modal-image-wrapper">
+                <img id="modal-img" src="" alt="Teljes méretű kép">
+            </div>
+            <div class="modal-caption" id="modal-caption">Látványosság neve</div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>Készült szeretettel ❤️ Norvégiai kalandokhoz</p>
+    </footer>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker sikeresen regisztrálva!', reg.scope))
+                    .catch(err => console.log('Service Worker regisztráció sikertelen:', err));
+            });
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Oslo Kalandok - Útinapló",
+  "short_name": "OsloKaland",
+  "description": "Interaktív útinapló és kalauz Oslo látványosságaihoz.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b132b",
+  "theme_color": "#0b132b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

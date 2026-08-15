@@ -488,11 +488,73 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+// --- Weather Widget (Open-Meteo API – no key needed) ---
+
+const WMO_CODES = {
+    0:  { desc: "Derült ég",           emoji: "☀️" },
+    1:  { desc: "Főként napos",        emoji: "🌤️" },
+    2:  { desc: "Részben felhős",      emoji: "⛅" },
+    3:  { desc: "Borult",              emoji: "☁️" },
+    45: { desc: "Ködös",               emoji: "🌫️" },
+    48: { desc: "Jeges köd",           emoji: "🌫️" },
+    51: { desc: "Szitálás",            emoji: "🌦️" },
+    53: { desc: "Mérsékelt szitálás",  emoji: "🌦️" },
+    55: { desc: "Erős szitálás",       emoji: "🌧️" },
+    61: { desc: "Gyenge eső",          emoji: "🌧️" },
+    63: { desc: "Mérsékelt eső",       emoji: "🌧️" },
+    65: { desc: "Erős eső",            emoji: "🌧️" },
+    71: { desc: "Gyenge hóesés",       emoji: "🌨️" },
+    73: { desc: "Mérsékelt hóesés",    emoji: "🌨️" },
+    75: { desc: "Erős hóesés",         emoji: "❄️" },
+    77: { desc: "Hószemcsék",          emoji: "❄️" },
+    80: { desc: "Zápor",               emoji: "🌦️" },
+    81: { desc: "Mérsékelt zápor",     emoji: "🌧️" },
+    82: { desc: "Erős zápor",          emoji: "⛈️" },
+    85: { desc: "Hózápor",             emoji: "🌨️" },
+    86: { desc: "Erős hózápor",        emoji: "❄️" },
+    95: { desc: "Zivatar",             emoji: "⛈️" },
+    96: { desc: "Zivatar jégesővel",   emoji: "⛈️" },
+    99: { desc: "Erős zivatar",        emoji: "⛈️" },
+};
+
+async function fetchOsloWeather() {
+    const API_URL = "https://api.open-meteo.com/v1/forecast" +
+        "?latitude=59.9139&longitude=10.7522" +
+        "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
+        "&wind_speed_unit=kmh&timezone=Europe%2FOslo";
+
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("API hiba");
+        
+        const data = await response.json();
+        const current = data.current;
+        
+        const code = current.weather_code;
+        const weather = WMO_CODES[code] || { desc: "Ismeretlen", emoji: "🌡️" };
+        
+        document.getElementById("weather-emoji").textContent = weather.emoji;
+        document.getElementById("weather-temp").textContent = `${Math.round(current.temperature_2m)}°C`;
+        document.getElementById("weather-desc").textContent = weather.desc;
+        document.getElementById("weather-wind").textContent = `💨 ${Math.round(current.wind_speed_10m)} km/h`;
+        document.getElementById("weather-humidity").textContent = `💧 ${current.relative_humidity_2m}%`;
+        
+        document.getElementById("weather-loading").style.display = "none";
+        document.getElementById("weather-content").style.display = "flex";
+        
+    } catch (error) {
+        console.error("Időjárás lekérése sikertelen:", error);
+        document.getElementById("weather-loading").style.display = "none";
+        document.getElementById("weather-error").style.display = "block";
+    }
+}
+
 // App Startup
 loadState();
 renderSights();
 renderChecklist();
 updateProgress();
+fetchOsloWeather();
 
 // Initialize map after page load
 window.addEventListener('DOMContentLoaded', () => {

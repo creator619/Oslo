@@ -29,7 +29,31 @@
             <span class="badge">Velkommen til Oslo 🇳🇴</span>
             <h1>Oslo Kalandok</h1>
             <p class="subtitle">Fedezd fel a város csodáit, tervezd meg a napjaidat és örökítsd meg a legszebb pillanatokat!</p>
-            
+
+            <!-- Oslo Weather Widget -->
+            <div class="weather-widget" id="weather-widget">
+                <div class="weather-loading" id="weather-loading">
+                    <div class="weather-spinner"></div>
+                    <span>Időjárás betöltése...</span>
+                </div>
+                <div class="weather-content" id="weather-content" style="display:none;">
+                    <div class="weather-icon-temp">
+                        <span class="weather-emoji" id="weather-emoji">🌤️</span>
+                        <span class="weather-temp" id="weather-temp">--°C</span>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-desc" id="weather-desc">Oslo, Norvégia</div>
+                        <div class="weather-meta">
+                            <span id="weather-wind">💨 -- km/h</span>
+                            <span id="weather-humidity">💧 --%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather-error" id="weather-error" style="display:none;">
+                    ⚠️ Időjárás nem elérhető
+                </div>
+            </div>
+
             <div class="progress-section">
                 <div class="progress-info">
                     <span class="progress-label">Felfedezés állása</span>

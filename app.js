@@ -1,85 +1,38 @@
 // Oslo Travel Companion data & state manager
 const SIGHTS_DATA = [
-    {
-        id: "vigeland",
-        title: "Vigeland Szoborpark",
-        address: "Kirkeveien, 0268 Oslo",
-        description: "A világ legnagyobb olyan szoborparkja, amelyet egyetlen művész alkotott. Gustav Vigeland több mint 200 életnagyságú bronz, gránit és kovácsoltvas szobra látható itt, köztük a híres Monolit és a Dühös Fiú.",
-        image: "img/vigeland.jpg",
-        lat: 59.9271,
-        lon: 10.7008,
-        day: 3
-    },
-    {
-        id: "opera",
-        title: "Oslói Operaház",
-        address: "Kirsten Flagstads Plass 1, 0150 Oslo",
-        description: "A fjordból kiemelkedő, jéghegyet mintázó hófehér márvány épület. Különlegessége, hogy a látogatók szabadon felsétálhatnak a tetőre, ahonnan csodálatos panoráma nyílik az egész városra és a fjordra.",
-        image: "img/opera.jpg",
-        lat: 59.9079,
-        lon: 10.7533,
-        day: 1
-    },
-    {
-        id: "munch",
-        title: "MUNCH Múzeum",
-        address: "Edvard Munchs plass 1, 0194 Oslo",
-        description: "A modern, tengerparti felhőkarcoló épület Edvard Munch, a világhírű norvég expresszionista festő műveinek ad otthont. Itt látható többek között az ikonikus 'Sikoly' (The Scream) festmény is.",
-        image: "img/munch.jpg",
-        lat: 59.9064,
-        lon: 10.7554,
-        day: 1
-    },
-    {
-        id: "holmenkollen",
-        title: "Holmenkollen Síugró Sánc",
-        address: "Kongeveien 40, 0787 Oslo",
-        description: "Az oslói sziluett elengedhetetlen része. Ez a világ egyik legmodernebb síugró sánca. A tetejéről elképesztő kilátás nyílik, az aljában pedig egy interaktív Símúzeum várja az érdeklődőket.",
-        image: "img/holmenkollen.jpg",
-        lat: 59.9639,
-        lon: 10.6677,
-        day: 3
-    },
-    {
-        id: "akershus",
-        title: "Akershus Erőd",
-        address: "Akershus Festning, 0150 Oslo",
-        description: "A 13. század végén épült középkori vár, amely Oslo védelmére szolgált. Később királyi reneszánsz kastéllyá alakították át. Gyönyörű történelmi falak, bástyák és parkosított sétányok alkotják.",
-        image: "img/akershus.jpg",
-        lat: 59.9072,
-        lon: 10.7364,
-        day: 1
-    },
-    {
-        id: "palace",
-        title: "Királyi Palota",
-        address: "Slottsplassen 1, 0010 Oslo",
-        description: "A norvég királyi család hivatalos rezidenciája, amely egy szép dombtetőn áll a Karl Johans kapu végén. Ha délután 13:30 körül érkezel, megnézheted a látványos őrségváltást is.",
-        image: "img/palace.jpg",
-        lat: 59.9169,
-        lon: 10.7275,
-        day: 1
-    },
-    {
-        id: "fram",
-        title: "Fram Múzeum",
-        address: "Bygdøynesveien 39, 0286 Oslo",
-        description: "A Bygdøy-félszigeten található múzeum, amely a híres sarkvidéki kutatóhajót, a Fram-ot mutatja be. Felsétálhatsz a hajó fedélzetére és megtapasztalhatod, milyen volt a sarkkutatók élete a jég fogságában.",
-        image: "img/fram.jpg",
-        lat: 59.9037,
-        lon: 10.6997,
-        day: 2
-    },
-    {
-        id: "karljohan",
-        title: "Karl Johans Gate",
-        address: "Karl Johans gate, 0154 Oslo",
-        description: "Oslo lüktető főutcája, amely a Főpályaudvartól egészen a Királyi Palotáig vezet. Hangulatos kávézók, üzletek, utcazenészek, és olyan fontos épületek találhatók itt, mint a Parlament és a Nemzeti Színház.",
-        image: "img/karljohan.jpg",
-        lat: 59.9126,
-        lon: 10.7428,
-        day: 1
-    }
+    // --- 1. NAP: Belváros & Fjordpart ---
+    { id: "opera", title: "Oslói Operaház", address: "Kirsten Flagstads Plass 1, 0150 Oslo", description: "A fjordból kiemelkedő, jéghegyet mintázó hófehér márvány épület. Különlegessége, hogy a látogatók szabadon felsétálhatnak a tetőre, ahonnan csodálatos panoráma nyílik az egész városra és a fjordra.", image: "img/opera.jpg", emoji: "🎭", lat: 59.9079, lon: 10.7533, day: 1 },
+    { id: "munch", title: "MUNCH Múzeum", address: "Edvard Munchs plass 1, 0194 Oslo", description: "A modern, tengerparti felhőkarcoló épület Edvard Munch, a világhírű norvég expresszionista festő műveinek ad otthont. Itt látható többek között az ikonikus 'Sikoly' (The Scream) festmény is.", image: "img/munch.jpg", emoji: "🖼️", lat: 59.9064, lon: 10.7554, day: 1 },
+    { id: "akershus", title: "Akershus Erőd", address: "Akershus Festning, 0150 Oslo", description: "A 13. század végén épült középkori vár, amely Oslo védelmére szolgált. Később királyi reneszánsz kastéllyá alakították át. Gyönyörű történelmi falak, bástyák és parkosított sétányok alkotják.", image: "img/akershus.jpg", emoji: "🏰", lat: 59.9072, lon: 10.7364, day: 1 },
+    { id: "palace", title: "Királyi Palota", address: "Slottsplassen 1, 0010 Oslo", description: "A norvég királyi család hivatalos rezidenciája, amely egy szép dombtetőn áll a Karl Johans kapu végén. Ha délután 13:30 körül érkezel, megnézheted a látványos őrségváltást is.", image: "img/palace.jpg", emoji: "👑", lat: 59.9169, lon: 10.7275, day: 1 },
+    { id: "karljohan", title: "Karl Johans Gate", address: "Karl Johans gate, 0154 Oslo", description: "Oslo lüktető főutcája, amely a Főpályaudvartól egészen a Királyi Palotáig vezet. Hangulatos kávézók, üzletek, utcazenészek, és olyan fontos épületek találhatók itt, mint a Parlament és a Nemzeti Színház.", image: "img/karljohan.jpg", emoji: "🛍️", lat: 59.9126, lon: 10.7428, day: 1 },
+    { id: "radhuset", title: "Oslo Városháza (Rådhuset)", address: "Rådhusplassen 1, 0037 Oslo", description: "Az 1950-ben megnyílt, két masszív vöröstégla-tornyával jellegzetes városháza egyben a Nobel Béke-díj átadóünnepségének helyszíne is. Belső terei freskókkal és norvég műalkotásokkal gazdagon díszítetten ingyen látogathatók.", emoji: "🏛️", lat: 59.9128, lon: 10.7337, day: 1 },
+    { id: "nobel", title: "Nobel Béke Központ", address: "Brynjulf Bulls plass 1, 0250 Oslo", description: "A Nobel Béke-díjat és díjazottjait bemutató interaktív múzeum a városháza tőszomszédságában. Lenyűgöző kiállítások, hanginstalláció és a díj 120+ éves történelme várja a látogatókat.", emoji: "☮️", lat: 59.9083, lon: 10.7291, day: 1 },
+    { id: "akerbrygge", title: "Aker Brygge", address: "Stranden 3, 0250 Oslo", description: "Oslo egykori hajógyárából lett trendi fjordparti negyede, tele prémium éttermekkel, tengerparti bárral, butikokkal és sétányokkal. Esténként a legjobb hely naplemente előtt ülni a fjord partján.", emoji: "⚓", lat: 59.9092, lon: 10.7256, day: 1 },
+    { id: "deichman", title: "Deichman Bjørvika Könyvtár", address: "Anne-Cath. Vestlys plass 1, 0150 Oslo", description: "Oslo 2020-ban megnyílt díjnyertes új főkönyvtára az Operaház és a MUNCH Múzeum szomszédságában. A lebegő, üveghomlokzatú épület belül óriási gyűjteményt, tető-terraszt és csodálatos fjordkilátást kínál. Belépő ingyenes!", emoji: "📚", lat: 59.9062, lon: 10.7520, day: 1 },
+    { id: "oslo_domkirke", title: "Oslo Katedrális (Domkirke)", address: "Stortorvet 1, 0155 Oslo", description: "Oslo főkatedrálisa 1697 óta áll a Karl Johans Gate közelében. A barokk stílusban épült templomban csodálatos üvegablakok és 17. századi fa oltár látható. A katedrális előtti tér (Stortorvet) Oslo egyik legforgalmasabb piactere.", emoji: "⛪", lat: 59.9125, lon: 10.7456, day: 1 },
+
+    // --- 2. NAP: Múzeumok félszigete (Bygdøy) ---
+    { id: "fram", title: "Fram Múzeum", address: "Bygdøynesveien 39, 0286 Oslo", description: "A Bygdøy-félszigeten található múzeum, amely a híres sarkvidéki kutatóhajót, a Fram-ot mutatja be. Felsétálhatsz a hajó fedélzetére és megtapasztalhatod, milyen volt a sarkkutatók élete a jég fogságában.", image: "img/fram.jpg", emoji: "🚢", lat: 59.9037, lon: 10.6997, day: 2 },
+    { id: "nasjonalmuseet", title: "Nasjonalmuseet", address: "Brynjulf Bulls plass 3, 0250 Oslo", description: "2022-ben megnyílt, Skandinávia legnagyobb művészeti múzeuma. A hatalmas, modern épületben norvég és nemzetközi festmények, design, dekoratív művészetek és építészet egyaránt megtalálhatók. Kötelező megnézni a norvég romantikus festményeket!", emoji: "🎨", lat: 59.9158, lon: 10.7340, day: 2 },
+    { id: "folkemuseum", title: "Norsk Folkemuseum", address: "Museumsveien 10, 0287 Oslo", description: "Európa egyik legnagyobb szabadtéri múzeuma, ahol 160 eredeti épületet gyűjtöttek össze a norvég vidékről. Sétálhatsz a 13. századi falusias utcácskákon, megnézheted a legendás Gol faoltáros templomot, és hagyományos kézműveseket figyelhetsz meg.", emoji: "🏘️", lat: 59.9050, lon: 10.6878, day: 2 },
+    { id: "kontiki", title: "Kon-Tiki Múzeum", address: "Bygdøynesveien 36, 0286 Oslo", description: "Thor Heyerdahl legendás 1947-es csendes-óceáni expedíciójának otthona. Az eredeti Kon-Tiki tutajt és az Ra II papiruszcsónakot megtekintheted, miközben megismered ezt a hihetetlen, merész expedíciót.", emoji: "🌊", lat: 59.9041, lon: 10.6991, day: 2 },
+    { id: "vikingship", title: "Viking Hajó Múzeum", address: "Huk Aveny 35, 0287 Oslo", description: "A Bygdøy-félsziget ikonikus múzeuma, ahol két valódi, 9. századi viking hajót – az Oseberget és a Gokstadet – állítottak ki. Ezek a világ legjobb állapotban fennmaradt viking hajói, mellettük viking kori sírmellékletekkel és hétköznapi tárgyakkal.", emoji: "⚔️", lat: 59.9046, lon: 10.6844, day: 2 },
+
+    // --- 3. NAP: Parkok & Panoráma ---
+    { id: "vigeland", title: "Vigeland Szoborpark", address: "Kirkeveien, 0268 Oslo", description: "A világ legnagyobb olyan szoborparkja, amelyet egyetlen művész alkotott. Gustav Vigeland több mint 200 életnagyságú bronz, gránit és kovácsoltvas szobra látható itt, köztük a híres Monolit és a Dühös Fiú.", image: "img/vigeland.jpg", emoji: "🗿", lat: 59.9271, lon: 10.7008, day: 3 },
+    { id: "holmenkollen", title: "Holmenkollen Síugró Sánc", address: "Kongeveien 40, 0787 Oslo", description: "Az oslói sziluett elengedhetetlen része. Ez a világ egyik legmodernebb síugró sánca. A tetejéről elképesztő kilátás nyílik, az aljában pedig egy interaktív Símúzeum várja az érdeklődőket.", image: "img/holmenkollen.jpg", emoji: "⛷️", lat: 59.9639, lon: 10.6677, day: 3 },
+    { id: "ekebergparken", title: "Ekebergparken", address: "Kongsveien 23, 0193 Oslo", description: "Oslo egyik legtitokzatosabb parkja, ahol modernkori szobrok, neolitikus sziklavésetek és csodálatos fjordkilátás keveredik. Ingyenes a belépő, és az egyik legszebb kilátópontja a városnak – ráadásul itt festette Munch a Sikolyt!", emoji: "🌲", lat: 59.8966, lon: 10.7706, day: 3 },
+    { id: "frognerseteren", title: "Frognerseteren", address: "Holmenkollveien 200, 0791 Oslo", description: "A város fölé emelkedő, hagyományos norvég drakonstílusban épült fa étterem és kilátópont. T-banéval könnyen megközelíthető. Lenyűgöző panoráma nyílik Oslóra és a fjordra – kötelező megkóstolni a klasszikus norvég áfonya pitét!", emoji: "🏔️", lat: 59.9820, lon: 10.6711, day: 3 },
+    { id: "oslofjord", title: "Oslófjord Komphajó Kirándulás", address: "Aker Brygge komp kikötő, 0250 Oslo", description: "Az Aker Brygge-ről induló kompjáratokkal ingyen (Ruter bérlettel) fedezheted fel a fjord szigeteit: Hovedøya, Gressholmen és Langøyene gyönyörű strandokkal és természetvédelmi területekkel várnak. Nyáron kötelező program!", emoji: "⛵", lat: 59.9060, lon: 10.7220, day: 3 },
+
+    // --- 4. NAP: Stílusos negyedek & Ízek ---
+    { id: "grunerllokka", title: "Grünerløkka negyed", address: "Grünerløkka, 0552 Oslo", description: "Oslo legmenőbb, legfiatalosabb negyede az Akerselva-folyó mentén. Indie kávézók, vintage boltok, utcai murálok és hangulatos terek teszik egyedivé. A Birkelunden park körül koncentrálódik a kulturális élet és az éttermek java.", emoji: "☕", lat: 59.9226, lon: 10.7597, day: 4 },
+    { id: "mathallen", title: "Mathallen Oslo", address: "Vulkan 5, 0178 Oslo", description: "Oslo gasztronómiai szíve: egy felújított gyárcsarnokban tucatnyi norvég és nemzetközi ételstandot, pékséget, sajtboltot és borkereskedést találsz. Tökéletes hely norvég ízeket felfedezni, vagy egy laza ebédet elfogyasztani helyi alapanyagokból.", emoji: "🍽️", lat: 59.9261, lon: 10.7523, day: 4 },
+    { id: "akerselva", title: "Akerselva folyópart", address: "Akerselva, Oslo", description: "Az Oslon átfolyó folyó mentén kialakított 8 km-es sétány a természetet és a várostörténelmet ötvözi. Vízesések, régi gyárépületek, street art, parkok és hangulatos kávézók váltják egymást. Grünerløkkától le egészen a fjordig vezet az út.", emoji: "🏞️", lat: 59.9194, lon: 10.7529, day: 4 },
+    { id: "botanisk", title: "Botanikus Kert & Természettudományi Múzeum", address: "Sars' gate 1, 0562 Oslo", description: "Oslo egyik legzöldebb menedéke: 7500+ növényfajt bemutató botanikus kert az Egyetem campusán. A szomszédos Természettudományi Múzeum dinoszaurusz-csontvázakkal és geológiai kiállítással ideális félnapos program.", emoji: "🌿", lat: 59.9175, lon: 10.7716, day: 4 },
+    { id: "tjuvholmen", title: "Tjuvholmen & Astrup Fearnley Múzeum", address: "Strandpromenaden 2, 0252 Oslo", description: "Az Aker Brygge szomszédságában fekvő modern művészeti negyed Renzo Piano tervezte, tengerre néző múzeummal. A gyűjtemény Jeff Koons, Damien Hirst és más kortárs sztárok műveit tartalmazza, a strandpromenád pedig ingyenesen látogatható.", emoji: "🏗️", lat: 59.9077, lon: 10.7185, day: 4 },
+    { id: "barcode", title: "Barcode-negyed", address: "Dronning Eufemias gate, 0191 Oslo", description: "Oslo legmerészebb modern építészeti negyede: a fjordparton sorakozó, egymás mellett álló felhőkarcolók 'vonalkódra' emlékeztetnek. A Bjørvika területe az elmúlt 15 évben alakult Oslo legdinamikusabb városrészévé – érdemes gyalogosan bejárni és fotózni.", emoji: "🏙️", lat: 59.9065, lon: 10.7608, day: 4 },
 ];
 
 const PRESET_CHECKLIST = [
@@ -231,9 +184,13 @@ function renderSights() {
         card.className = `sight-card ${isVisited ? 'visited' : ''}`;
         card.id = `card-${sight.id}`;
 
+        const imageBlock = sight.image
+            ? `<img src="${sight.image}" alt="${sight.title}" class="sight-image">`
+            : `<div class="sight-image-placeholder"><span class="sight-emoji-icon">${sight.emoji || '📍'}</span></div>`;
+
         card.innerHTML = `
             <div class="sight-image-container">
-                <img src="${sight.image}" alt="${sight.title}" class="sight-image">
+                ${imageBlock}
                 <div class="visited-overlay">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-top: 1px;"><path d="M20 6L9 17l-5-5"/></svg>
                     Meglátogatva

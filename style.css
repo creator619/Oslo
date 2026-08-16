@@ -17,20 +17,27 @@
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    position: relative;
     background-color: var(--bg-primary);
     color: var(--text-main);
     font-family: var(--font-sans);
     line-height: 1.6;
-    overflow-x: hidden;
     min-height: 100vh;
-    position: relative;
+}
+
+img, video, iframe, svg, canvas {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Decorative Blobs for Ambient Lighting */
@@ -1471,64 +1478,105 @@ h1 {
     color: #ffffff;
 }
 
-/* --- High-end Mobile & Touch Responsiveness --- */
+/* --- Strict Mobile No-Overflow & Touch Responsiveness --- */
 @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100%;
+        max-width: 100vw;
+    }
+
     .app-header {
-        padding: 35px 16px 20px;
+        padding: 30px 14px 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .header-container {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     h1 {
-        font-size: 2.1rem;
+        font-size: 1.9rem;
         margin-bottom: 6px;
+        word-break: break-word;
     }
 
     .subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 16px;
+        font-size: 0.88rem;
+        margin-bottom: 14px;
+        padding: 0 4px;
+    }
+
+    .weather-widget, .progress-section {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .main-container {
         padding: 0 12px 40px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .map-section {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .map-header-row {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .btn-hotel-route-map {
         width: 100%;
         justify-content: center;
         padding: 12px;
-        font-size: 0.92rem;
+        font-size: 0.88rem;
+        box-sizing: border-box;
     }
 
     #map {
-        height: 320px;
+        height: 280px;
+        width: 100%;
+        max-width: 100%;
         border-radius: var(--radius-md);
+        box-sizing: border-box;
     }
 
     /* 2x2 Mobile Grid for Navigation Tabs: Fits 100% on every phone screen with ZERO overflow */
     .nav-tabs {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        gap: 6px;
         width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         padding-bottom: 0;
         border-bottom: none;
     }
 
     .nav-tabs .tab-btn {
         width: 100%;
+        max-width: 100%;
         text-align: center;
-        padding: 12px 6px;
-        font-size: 0.88rem;
+        padding: 10px 4px;
+        font-size: 0.82rem;
         font-weight: 700;
-        border-radius: var(--radius-md);
-        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.06);
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-sizing: border-box;
         white-space: nowrap;
@@ -1547,50 +1595,64 @@ h1 {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .btn-add-sight {
         width: 100%;
         justify-content: center;
-        padding: 14px;
-        font-size: 0.95rem;
+        padding: 12px;
+        font-size: 0.9rem;
+        box-sizing: border-box;
     }
 
     .toolbar-secondary-actions {
         width: 100%;
         flex-direction: column;
         gap: 8px;
+        box-sizing: border-box;
     }
 
     .btn-toolbar-subtle {
         width: 100%;
         justify-content: center;
         padding: 10px;
+        box-sizing: border-box;
     }
 
-    .sights-grid {
-        grid-template-columns: 1fr;
+    .sights-grid, .food-grid, .info-checklist-grid, .checklist-grid {
+        grid-template-columns: 1fr !important;
         gap: 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
-    .sight-card {
+    .sight-card, .food-card, .info-card, .checklist-card {
+        width: 100%;
+        max-width: 100%;
         border-radius: 16px;
+        box-sizing: border-box;
     }
 
     .sight-image-container {
-        height: 190px;
+        height: 180px;
     }
 
-    .sight-info {
-        padding: 16px;
+    .sight-info, .food-info {
+        padding: 14px;
+        box-sizing: border-box;
     }
 
-    .sight-title {
-        font-size: 1.25rem;
+    .sight-title, .food-title {
+        font-size: 1.15rem;
     }
 
     .sight-actions {
         gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .btn-visit-toggle,
@@ -1598,36 +1660,36 @@ h1 {
     .btn-delete-sight {
         width: 100%;
         justify-content: center;
-        padding: 12px;
+        padding: 11px;
+        font-size: 0.88rem;
+        box-sizing: border-box;
     }
 
     .modal-content {
-        width: 94%;
-        padding: 20px 16px;
-        max-height: 88vh;
-        border-radius: 20px;
+        width: 92%;
+        max-width: 92vw;
+        padding: 18px 14px;
+        max-height: 85vh;
+        border-radius: 18px;
+        box-sizing: border-box;
     }
 
     .hotel-info-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
     }
 
     .food-filters {
         display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 6px;
-    }
-
-    .food-filters::-webkit-scrollbar {
-        display: none;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .food-filters .filter-btn {
-        white-space: nowrap;
-        flex-shrink: 0;
+        font-size: 0.8rem;
+        padding: 6px 10px;
     }
 }

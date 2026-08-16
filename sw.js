@@ -1,4 +1,4 @@
-const CACHE_NAME = 'oslo-utitars-cache-v14';
+const CACHE_NAME = 'oslo-utitars-cache-v15';
 const ASSETS = [
   './',
   './index.html',

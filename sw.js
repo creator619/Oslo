@@ -1,4 +1,4 @@
-const CACHE_NAME = 'oslo-kaland-cache-v6';
+const CACHE_NAME = 'oslo-utitars-cache-v7';
 const ASSETS = [
   './',
   './index.html',

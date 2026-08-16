@@ -1,7 +1,7 @@
 {
-  "name": "Oslo Kalandok - Útinapló",
-  "short_name": "OsloKaland",
-  "description": "Interaktív útinapló és kalauz Oslo látványosságaihoz.",
+  "name": "Oslo Útitárs 🇳🇴",
+  "short_name": "OsloUtitars",
+  "description": "Interaktív útinapló, térkép és kalauz Oslo látványosságaihoz és szállodájához.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b132b",

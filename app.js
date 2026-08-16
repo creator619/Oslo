@@ -192,7 +192,9 @@ const FOOD_DATA = [
     }
 ];
 
-// App State
+// LocalStorage Persistence Management
+const STORAGE_KEY = "oslo_utitars_state_v1";
+
 let appState = {
     visited: {},
     photos: {},
@@ -200,6 +202,31 @@ let appState = {
     triedFoods: {},
     sights: [...SIGHTS_DATA]
 };
+
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        if (typeof updateProgress === "function") updateProgress();
+    } catch (e) {
+        console.error("LocalStorage mentési hiba:", e);
+    }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            appState.visited = parsed.visited || {};
+            appState.photos = parsed.photos || {};
+            appState.checklist = parsed.checklist || [...PRESET_CHECKLIST];
+            appState.triedFoods = parsed.triedFoods || {};
+            appState.sights = parsed.sights || [...SIGHTS_DATA];
+        }
+    } catch (e) {
+        console.error("LocalStorage betöltési hiba:", e);
+    }
+}
 
 let map = null;
 let markers = {};

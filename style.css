@@ -40,29 +40,39 @@ img, video, iframe, svg, canvas {
     height: auto;
 }
 
-/* Decorative Blobs for Ambient Lighting */
+/* Decorative Blobs for Ambient Lighting (Strictly Contained) */
+.decor-blobs-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
 .decor-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(150px);
-    z-index: -1;
-    opacity: 0.15;
+    filter: blur(120px);
+    opacity: 0.12;
     pointer-events: none;
 }
 
 .blob-1 {
     top: -10%;
     left: -10%;
-    width: 600px;
-    height: 600px;
+    width: 350px;
+    height: 350px;
     background-color: var(--accent-blue);
 }
 
 .blob-2 {
     top: 40%;
     right: -10%;
-    width: 500px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
     background-color: var(--accent-cyan);
 }
 

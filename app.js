@@ -213,6 +213,60 @@ function getSights() {
     return appState.sights;
 }
 
+const CITYBOX_HOTEL = {
+    id: "citybox_hotel",
+    title: "Citybox Oslo Szálloda",
+    address: "Prinsens gate 24, 0154 Oslo",
+    lat: 59.9109,
+    lon: 10.7461
+};
+
+let userGpsMarker = null;
+let hotelRouteLine = null;
+
+function addHotelMapMarker() {
+    if (!map) return;
+    
+    const customIcon = L.divIcon({
+        html: `<div style="
+            background: linear-gradient(135deg, #ffb703, #fb8500); 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50% 50% 50% 0; 
+            transform: rotate(-45deg); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 2px solid #ffffff; 
+            box-shadow: 0 4px 15px rgba(255,183,3,0.6);
+            z-index: 1000;
+        ">
+            <div style="transform: rotate(45deg); font-size: 18px;">
+                🏨
+            </div>
+        </div>`,
+        className: 'hotel-map-pin',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40]
+    });
+
+    const hotelMarker = L.marker([CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon], { icon: customIcon }).addTo(map);
+    
+    hotelMarker.bindPopup(`
+        <div style="font-family: 'Outfit', sans-serif; text-align: center;">
+            <strong style="font-size: 1.1rem; color: #0b132b;">🏨 Citybox Oslo (Szálloda)</strong><br>
+            <span style="font-size: 0.82rem; color: #4a5568;">${CITYBOX_HOTEL.address}</span><br>
+            <div style="margin-top: 8px;">
+                <button onclick="routeToHotelFromGPS()" style="background: linear-gradient(135deg, #ffb703, #fb8500); color: #0b132b; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.82rem;">
+                    🧭 GPS Útvonal ide!
+                </button>
+            </div>
+        </div>
+    `);
+
+    markers['citybox_hotel'] = hotelMarker;
+}
+
 // Initialize Leaflet Map
 function initMap() {
     // Center map on Oslo city center
@@ -240,6 +294,9 @@ function rebuildAllMapMarkers() {
     getSights().forEach(sight => {
         updateMapMarker(sight);
     });
+
+    // Always add Hotel Marker
+    addHotelMapMarker();
 }
 
 // Custom Marker design using DivIcon
@@ -500,6 +557,106 @@ window.resetDefaultSights = function() {
         renderSights();
         rebuildAllMapMarkers();
     }
+};
+
+// Hotel Modal & GPS Route Controller
+window.openHotelModal = function() {
+    document.getElementById("hotel-modal").classList.add("active");
+};
+
+window.closeHotelModal = function() {
+    document.getElementById("hotel-modal").classList.remove("active");
+};
+
+function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+window.routeToHotelFromGPS = function() {
+    const statusBanner = document.getElementById("gps-status-banner");
+    
+    if (statusBanner) {
+        statusBanner.style.display = "block";
+        statusBanner.innerHTML = "⏳ GPS pozíció meghatározása folyamatban...";
+    }
+
+    if (!navigator.geolocation) {
+        const errorMsg = "A böngésződ nem támogatja a GPS helymeghatározást. Nyitjuk a Google Maps útvonaltervezőt...";
+        if (statusBanner) statusBanner.textContent = errorMsg;
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo&travelmode=walking`, '_blank');
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+            
+            // Calculate distance to hotel
+            const distKm = calculateDistanceKm(userLat, userLon, CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon);
+            const distText = distKm < 1 ? `${Math.round(distKm * 1000)} méter` : `${distKm.toFixed(1)} km`;
+            const walkTimeMin = Math.round((distKm / 4.5) * 60);
+
+            if (statusBanner) {
+                statusBanner.innerHTML = `✅ <strong>Sikeres GPS kapcsolat!</strong><br>Pozíciódtól a Citybox Szálloda távolsága: <strong>${distText}</strong> (kb. ${walkTimeMin} perc séta). Megnyitottuk az élő navigációt!`;
+            }
+
+            // Draw route on Leaflet Map
+            if (map) {
+                if (userGpsMarker) map.removeLayer(userGpsMarker);
+                if (hotelRouteLine) map.removeLayer(hotelRouteLine);
+
+                // User pin
+                const userIcon = L.divIcon({
+                    html: `<div style="background: #00f5d4; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #0b132b; box-shadow: 0 0 15px #00f5d4;"></div>`,
+                    className: 'user-gps-pin',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
+                });
+
+                userGpsMarker = L.marker([userLat, userLon], { icon: userIcon }).addTo(map);
+                userGpsMarker.bindPopup(`<b>👤 Jelenlegi pozíciód</b><br>${distText} a Citybox Hoteltől`).openPopup();
+
+                // Draw dashed line to hotel
+                hotelRouteLine = L.polyline([[userLat, userLon], [CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon]], {
+                    color: '#ffb703',
+                    weight: 4,
+                    dashArray: '8, 8',
+                    opacity: 0.9
+                }).addTo(map);
+
+                if (markers['citybox_hotel']) {
+                    const group = new L.featureGroup([userGpsMarker, markers['citybox_hotel']]);
+                    map.fitBounds(group.getBounds().pad(0.2));
+                }
+            }
+
+            // Open Google Maps walking directions
+            const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo&travelmode=walking`;
+            window.open(gmapsUrl, '_blank');
+        },
+        (error) => {
+            console.warn("GPS Hiba:", error);
+            if (statusBanner) {
+                statusBanner.innerHTML = `⚠️ A GPS pozíció nem érhető el (engedélyezd a helymeghatározást a mobilodon!). Nyitjuk a Google Maps útvonaltervezőt...`;
+            }
+            const fallbackUrl = `https://www.google.com/maps/dir/?api=1&destination=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo&travelmode=walking`;
+            window.open(fallbackUrl, '_blank');
+
+            if (map) {
+                map.setView([CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon], 15);
+                if (markers['citybox_hotel']) markers['citybox_hotel'].openPopup();
+            }
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
 };
 
 // Toggle visited state

@@ -69,7 +69,13 @@
     <main class="main-container">
         <!-- Interactive Leaflet Map Section -->
         <section class="map-section">
-            <h2 class="section-title">Interaktív Térkép</h2>
+            <div class="map-header-row">
+                <h2 class="section-title">Interaktív Térkép</h2>
+                <button class="btn-hotel-route-map" onclick="routeToHotelFromGPS()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>🧭 GPS Útvonal a Szállodába</span>
+                </button>
+            </div>
             <div id="map"></div>
         </section>
 
@@ -77,6 +83,7 @@
         <div class="nav-tabs">
             <button class="tab-btn active" onclick="switchMainTab('itinerary')">📍 Látnivalók</button>
             <button class="tab-btn" onclick="switchMainTab('gastronomy')">🍽️ Gasztronómiai Ajánló</button>
+            <button class="tab-btn btn-hotel-tab" onclick="openHotelModal()">🏨 Szálloda (Citybox)</button>
             <button class="tab-btn" onclick="switchMainTab('checklist')">Úti Tippek & Csekklista</button>
         </div>
 
@@ -233,6 +240,54 @@
                 </div>
                 <button type="submit" class="btn-submit-sight">Látnivaló Mentése ✨</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal for Citybox Hotel & GPS routing -->
+    <div class="modal" id="hotel-modal">
+        <div class="modal-backdrop" onclick="closeHotelModal()"></div>
+        <div class="modal-content hotel-modal-content">
+            <button class="modal-close" onclick="closeHotelModal()" aria-label="Bezárás">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            
+            <div class="hotel-modal-header">
+                <span class="hotel-badge">🏨 Szállodád Oslóban</span>
+                <h3 class="hotel-title">Citybox Oslo</h3>
+                <p class="hotel-address">📍 Prinsens gate 24, 0154 Oslo, Norvégia</p>
+            </div>
+
+            <div class="hotel-actions-group">
+                <button class="btn-route-gps-main" onclick="routeToHotelFromGPS()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    <span>🧭 GPS Útvonal a Szállodába (Navigáció)</span>
+                </button>
+                <a href="https://maps.google.com/?q=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo" target="_blank" rel="noopener" class="btn-hotel-gmaps">
+                    Google Maps Megnyitása ↗
+                </a>
+            </div>
+
+            <div id="gps-status-banner" class="gps-status-banner" style="display: none;"></div>
+
+            <div class="hotel-info-grid">
+                <div class="hotel-info-card-item">
+                    <h4>🚆 Közlekedési kapcsolatok</h4>
+                    <ul>
+                        <li><strong>Oslo Sentralstasjon (Oslo S):</strong> 300 m (3 perc séta) – Flytoget reptéri vonat & metrók.</li>
+                        <li><strong>Jernbanetorget:</strong> 250 m (T-bane csomópont).</li>
+                        <li><strong>Villamos (Trikk):</strong> Prinsens gate megálló közvetlenül a hotel előtt.</li>
+                    </ul>
+                </div>
+
+                <div class="hotel-info-card-item">
+                    <h4>🔑 Hasznos információk</h4>
+                    <ul>
+                        <li><strong>Check-in:</strong> 15:00-tól (24/7 önkiszolgáló terminálok).</li>
+                        <li><strong>Check-out:</strong> 12:00-ig.</li>
+                        <li><strong>Szolgáltatások:</strong> Ingyenes Wi-Fi, közösségi konyha, tv-lounge és mosoda.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 

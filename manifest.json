@@ -1,6 +1,6 @@
 {
   "name": "Oslo Útitárs",
-  "short_name": "OsloUtitars",
+  "short_name": "Oslo Útitárs",
   "description": "Interaktív útinapló, térkép és kalauz Oslo látványosságaihoz és szállodájához.",
   "start_url": "./index.html",
   "display": "standalone",
@@ -9,14 +9,16 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "img/icon-192.png",
+      "src": "icon-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "img/icon-512.png",
+      "src": "icon-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ]
 }

@@ -1,10 +1,13 @@
-const CACHE_NAME = 'oslo-utitars-cache-v17';
+const CACHE_NAME = 'oslo-utitars-cache-v18';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './apple-touch-icon.png',
   './img/vigeland.jpg',
   './img/opera.jpg',
   './img/munch.jpg',

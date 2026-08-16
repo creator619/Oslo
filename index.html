@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oslo Útitárs</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- PWA support -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0b132b">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet">
+
     <!-- Leaflet.js Map Library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+
 <body>
     <div class="decor-blob blob-1"></div>
     <div class="decor-blob blob-2"></div>
@@ -28,7 +32,8 @@
         <div class="header-container">
             <span class="badge">Velkommen til Oslo 🇳🇴</span>
             <h1>Oslo Útitárs</h1>
-            <p class="subtitle">Fedezd fel a város csodáit, tervezd meg a napjaidat és örökítsd meg a legszebb pillanatokat!</p>
+            <p class="subtitle">Fedezd fel a város csodáit, tervezd meg a napjaidat és örökítsd meg a legszebb
+                pillanatokat!</p>
 
             <!-- Oslo Weather Widget -->
             <div class="weather-widget" id="weather-widget">
@@ -72,7 +77,11 @@
             <div class="map-header-row">
                 <h2 class="section-title">Interaktív Térkép</h2>
                 <button class="btn-hotel-route-map" onclick="routeToHotelFromGPS()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
                     <span>🧭 GPS Útvonal a Szállodába</span>
                 </button>
             </div>
@@ -92,14 +101,20 @@
             <!-- Action Toolbar for Sights -->
             <div class="itinerary-toolbar">
                 <button class="btn-add-sight" onclick="openAddSightModal()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
                     <span>+ Új Látnivaló Hozzáadása</span>
                 </button>
                 <div class="toolbar-secondary-actions">
-                    <button class="btn-toolbar-subtle danger" onclick="clearAllSights()" title="Összes látnivaló törlése (tiszta lap indítása)">
+                    <button class="btn-toolbar-subtle danger" onclick="clearAllSights()"
+                        title="Összes látnivaló törlése (tiszta lap indítása)">
                         🗑️ Tiszta lap (Összes törlése)
                     </button>
-                    <button class="btn-toolbar-subtle" onclick="resetDefaultSights()" title="Eredeti oslói látnivalók visszaállítása">
+                    <button class="btn-toolbar-subtle" onclick="resetDefaultSights()"
+                        title="Eredeti oslói látnivalók visszaállítása">
                         🔄 Ajánló visszaállítása
                     </button>
                 </div>
@@ -131,19 +146,26 @@
                     <h3 class="card-heading">ℹ️ Hasznos Oslói Tudnivalók</h3>
                     <ul class="info-list">
                         <li>
-                            <strong class="info-highlight">🚌 Közlekedés:</strong> Töltsd le a <strong>Ruter</strong> appot a jegyekhez és útvonaltervezéshez. A zónajegyek a metróra (T-bane), villamosra (Trikk), buszokra és kompokra is érvényesek.
+                            <strong class="info-highlight">🚌 Közlekedés:</strong> Töltsd le a <strong>Ruter</strong>
+                            appot a jegyekhez és útvonaltervezéshez. A zónajegyek a metróra (T-bane), villamosra
+                            (Trikk), buszokra és kompokra is érvényesek.
                         </li>
                         <li>
-                            <strong class="info-highlight">💳 Fizetés:</strong> Norvégia szinte teljesen készpénzmentes. Mindenhol (még a nyilvános wc-kben is) tudsz fizetni kártyával vagy telefonnal. Készpénzt felesleges váltani.
+                            <strong class="info-highlight">💳 Fizetés:</strong> Norvégia szinte teljesen készpénzmentes.
+                            Mindenhol (még a nyilvános wc-kben is) tudsz fizetni kártyával vagy telefonnal. Készpénzt
+                            felesleges váltani.
                         </li>
                         <li>
-                            <strong class="info-highlight">💧 Ivóvíz:</strong> A csapvíz Norvégiában rendkívül tiszta és finom. Vigyél magaddal kulacsot, és töltsd újra bárhol!
+                            <strong class="info-highlight">💧 Ivóvíz:</strong> A csapvíz Norvégiában rendkívül tiszta és
+                            finom. Vigyél magaddal kulacsot, és töltsd újra bárhol!
                         </li>
                         <li>
-                            <strong class="info-highlight">☔ Időjárás:</strong> Az időjárás gyorsan változhat (szél, eső, napsütés egymás után). Öltözz rétegesen, és mindig legyen nálad esőkabát!
+                            <strong class="info-highlight">☔ Időjárás:</strong> Az időjárás gyorsan változhat (szél,
+                            eső, napsütés egymás után). Öltözz rétegesen, és mindig legyen nálad esőkabát!
                         </li>
                         <li>
-                            <strong class="info-highlight">🚨 Vészhívók:</strong> Mentők: 113, Rendőrség: 112, Tűzoltók: 110.
+                            <strong class="info-highlight">🚨 Vészhívók:</strong> Mentők: 113, Rendőrség: 112, Tűzoltók:
+                            110.
                         </li>
                     </ul>
                 </div>
@@ -172,18 +194,24 @@
                 <h3 class="card-heading">🇳🇴 Norvég Gasztro-Kisokos & Tudnivalók</h3>
                 <ul class="info-list">
                     <li>
-                        <strong class="info-highlight">🧀 Brunost (Barna Saajt):</strong> Édeskés, karamellás ízű kecske/tehénsajt. Legjobb vékonyra gyalulva (*ostehøvel* sajtgyaluval) meleg szív-gofrire vagy barna kenyérre.
+                        <strong class="info-highlight">🧀 Brunost (Barna Saajt):</strong> Édeskés, karamellás ízű
+                        kecske/tehénsajt. Legjobb vékonyra gyalulva (*ostehøvel* sajtgyaluval) meleg szív-gofrire vagy
+                        barna kenyérre.
                     </li>
                     <li>
-                        <strong class="info-highlight">☕ Kávékultúra:</strong> Norvégia a világ egyik legnagyob kávéfogyasztója. A világos pörkölésű (*light roast*) filterkávét részesítik előnyben, ami gyümölcsös és tejes hozzáadás nélkül is selymes.
+                        <strong class="info-highlight">☕ Kávékultúra:</strong> Norvégia a világ egyik legnagyob
+                        kávéfogyasztója. A világos pörkölésű (*light roast*) filterkávét részesítik előnyben, ami
+                        gyümölcsös és tejes hozzáadás nélkül is selymes.
                     </li>
                     <li>
-                        <strong class="info-highlight">🍷 Vinmonopolet (Alkoholvásárlás):</strong> 4.7% feletti alkoholt kizárólag az állami **Vinmonopolet** szaküzletekben lehet venni! Szombaton 15:00-kor bezárnak, vasárnap zárva tartanak.
+                        <strong class="info-highlight">🍷 Vinmonopolet (Alkoholvásárlás):</strong> 4.7% feletti alkoholt
+                        kizárólag az állami **Vinmonopolet** szaküzletekben lehet venni! Szombaton 15:00-kor bezárnak,
+                        vasárnap zárva tartanak.
                     </li>
                     <li>
-                        <strong class="info-highlight">🍞 Matpakke:</strong> A híres norvég nyitott szendvics hagyománya. Egyszerű, egészséges és praktikus kirándulásokhoz!
+                        <strong class="info-highlight">🍞 Matpakke:</strong> A híres norvég nyitott szendvics
+                        hagyománya. Egyszerű, egészséges és praktikus kirándulásokhoz!
                     </li>
-                </ul>
             </div>
         </div>
     </main>
@@ -193,7 +221,9 @@
         <div class="modal-backdrop" id="modal-backdrop"></div>
         <div class="modal-content">
             <button class="modal-close" id="modal-close" aria-label="Bezárás">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
             </button>
             <div class="modal-image-wrapper">
                 <img id="modal-img" src="" alt="Teljes méretű kép">
@@ -207,7 +237,9 @@
         <div class="modal-backdrop" id="add-sight-backdrop" onclick="closeAddSightModal()"></div>
         <div class="modal-content add-sight-modal-content">
             <button class="modal-close" onclick="closeAddSightModal()" aria-label="Bezárás">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
             </button>
             <h3 class="modal-form-title">✨ Új Program Hozzáadása az Útitervhez</h3>
             <form id="add-sight-form" onsubmit="handleCustomSightSubmit(event)">
@@ -221,7 +253,8 @@
                 </div>
                 <div class="form-group">
                     <label for="sight-desc-input">Leírás / Saját jegyzet</label>
-                    <textarea id="sight-desc-input" rows="3" placeholder="pl. Szaunafoglalás 16:00-ra, vigyünk törölközőt és fürdőruhát!"></textarea>
+                    <textarea id="sight-desc-input" rows="3"
+                        placeholder="pl. Szaunafoglalás 16:00-ra, vigyünk törölközőt és fürdőruhát!"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="sight-emoji-select">Ikon / Emoji</label>
@@ -248,9 +281,11 @@
         <div class="modal-backdrop" onclick="closeHotelModal()"></div>
         <div class="modal-content hotel-modal-content">
             <button class="modal-close" onclick="closeHotelModal()" aria-label="Bezárás">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
             </button>
-            
+
             <div class="hotel-modal-header">
                 <span class="hotel-badge">🏨 Szállodád Oslóban</span>
                 <h3 class="hotel-title">Citybox Oslo</h3>
@@ -259,10 +294,15 @@
 
             <div class="hotel-actions-group">
                 <button class="btn-route-gps-main" onclick="routeToHotelFromGPS()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                    </svg>
                     <span>🧭 GPS Útvonal a Szállodába (Navigáció)</span>
                 </button>
-                <a href="https://maps.google.com/?q=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo" target="_blank" rel="noopener" class="btn-hotel-gmaps">
+                <a href="https://maps.google.com/?q=Citybox+Oslo,+Prinsens+gate+24,+0154+Oslo" target="_blank"
+                    rel="noopener" class="btn-hotel-gmaps">
                     Google Maps Megnyitása ↗
                 </a>
             </div>
@@ -273,7 +313,8 @@
                 <div class="hotel-info-card-item">
                     <h4>🚆 Közlekedési kapcsolatok</h4>
                     <ul>
-                        <li><strong>Oslo Sentralstasjon (Oslo S):</strong> 300 m (3 perc séta) – Flytoget reptéri vonat & metrók.</li>
+                        <li><strong>Oslo Sentralstasjon (Oslo S):</strong> 300 m (3 perc séta) – Flytoget reptéri vonat
+                            & metrók.</li>
                         <li><strong>Jernbanetorget:</strong> 250 m (T-bane csomópont).</li>
                         <li><strong>Villamos (Trikk):</strong> Prinsens gate megálló közvetlenül a hotel előtt.</li>
                     </ul>
@@ -307,4 +348,5 @@
     </script>
     <script src="app.js"></script>
 </body>
+
 </html>

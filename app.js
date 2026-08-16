@@ -226,7 +226,7 @@ let hotelRouteLine = null;
 
 function addHotelMapMarker() {
     if (!map) return;
-    
+
     const customIcon = L.divIcon({
         html: `<div style="
             background: linear-gradient(135deg, #ffb703, #fb8500); 
@@ -251,7 +251,7 @@ function addHotelMapMarker() {
     });
 
     const hotelMarker = L.marker([CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon], { icon: customIcon }).addTo(map);
-    
+
     hotelMarker.bindPopup(`
         <div style="font-family: 'Outfit', sans-serif; text-align: center;">
             <strong style="font-size: 1.1rem; color: #0b132b;">🏨 Citybox Oslo (Szálloda)</strong><br>
@@ -302,7 +302,7 @@ function rebuildAllMapMarkers() {
 // Custom Marker design using DivIcon
 function updateMapMarker(sight) {
     const isVisited = !!appState.visited[sight.id];
-    
+
     // Remove old marker if exists
     if (markers[sight.id]) {
         map.removeLayer(markers[sight.id]);
@@ -342,7 +342,7 @@ function updateMapMarker(sight) {
     });
 
     const marker = L.marker([sight.lat, sight.lon], { icon: customIcon }).addTo(map);
-    
+
     marker.bindPopup(`
         <div style="font-family: 'Outfit', sans-serif;">
             <strong style="font-size: 1.05rem; color: #0b132b;">${sight.title}</strong><br>
@@ -386,7 +386,7 @@ function updateProgress() {
     const total = sights.length;
     const visitedCount = Object.keys(appState.visited).filter(id => appState.visited[id] && sights.some(s => s.id === id)).length;
     const percent = total > 0 ? Math.round((visitedCount / total) * 100) : 0;
-    
+
     document.getElementById("progress-bar").style.width = `${percent}%`;
     document.getElementById("progress-text").textContent = `${percent}% (${visitedCount} / ${total})`;
 }
@@ -443,9 +443,9 @@ function renderSights() {
                 <div class="sight-actions">
                     <button class="btn-visit-toggle" onclick="toggleVisited('${sight.id}')">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            ${isVisited 
-                                ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' 
-                                : '<circle cx="12" cy="12" r="10"/>'}
+                            ${isVisited
+                ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+                : '<circle cx="12" cy="12" r="10"/>'}
                         </svg>
                         <span>${isVisited ? 'Meglátogatva ✓' : 'Megjelölés meglátogatottként'}</span>
                     </button>
@@ -479,16 +479,16 @@ function renderSights() {
 }
 
 // Custom Sight Manager Functions
-window.openAddSightModal = function() {
+window.openAddSightModal = function () {
     document.getElementById("add-sight-modal").classList.add("active");
 };
 
-window.closeAddSightModal = function() {
+window.closeAddSightModal = function () {
     document.getElementById("add-sight-modal").classList.remove("active");
     document.getElementById("add-sight-form").reset();
 };
 
-window.handleCustomSightSubmit = function(e) {
+window.handleCustomSightSubmit = function (e) {
     e.preventDefault();
     const title = document.getElementById("sight-title-input").value.trim();
     const address = document.getElementById("sight-address-input").value.trim();
@@ -522,7 +522,7 @@ window.handleCustomSightSubmit = function(e) {
     closeAddSightModal();
 };
 
-window.deleteSight = function(id) {
+window.deleteSight = function (id) {
     const sight = getSights().find(s => s.id === id);
     if (!sight) return;
 
@@ -538,7 +538,7 @@ window.deleteSight = function(id) {
     }
 };
 
-window.clearAllSights = function() {
+window.clearAllSights = function () {
     if (confirm("Biztosan TÖRÖLNI szeretnéd az összes programot? Így tiszta lappal indíthatsz és saját útitervet építhetsz fel!")) {
         appState.sights = [];
         appState.visited = {};
@@ -550,7 +550,7 @@ window.clearAllSights = function() {
     }
 };
 
-window.resetDefaultSights = function() {
+window.resetDefaultSights = function () {
     if (confirm("Visszaállítod az eredeti oslói ajánlott látnivalókat az útitervbe?")) {
         appState.sights = [...SIGHTS_DATA];
         saveState();
@@ -560,11 +560,11 @@ window.resetDefaultSights = function() {
 };
 
 // Hotel Modal & GPS Route Controller
-window.openHotelModal = function() {
+window.openHotelModal = function () {
     document.getElementById("hotel-modal").classList.add("active");
 };
 
-window.closeHotelModal = function() {
+window.closeHotelModal = function () {
     document.getElementById("hotel-modal").classList.remove("active");
 };
 
@@ -572,16 +572,16 @@ function calculateDistanceKm(lat1, lon1, lat2, lon2) {
     const R = 6371; // km
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
 
-window.routeToHotelFromGPS = function() {
+window.routeToHotelFromGPS = function () {
     const statusBanner = document.getElementById("gps-status-banner");
-    
+
     if (statusBanner) {
         statusBanner.style.display = "block";
         statusBanner.innerHTML = "⏳ GPS pozíció meghatározása folyamatban...";
@@ -598,7 +598,7 @@ window.routeToHotelFromGPS = function() {
         (position) => {
             const userLat = position.coords.latitude;
             const userLon = position.coords.longitude;
-            
+
             // Calculate distance to hotel
             const distKm = calculateDistanceKm(userLat, userLon, CITYBOX_HOTEL.lat, CITYBOX_HOTEL.lon);
             const distText = distKm < 1 ? `${Math.round(distKm * 1000)} méter` : `${distKm.toFixed(1)} km`;
@@ -660,16 +660,16 @@ window.routeToHotelFromGPS = function() {
 };
 
 // Toggle visited state
-window.toggleVisited = function(id) {
+window.toggleVisited = function (id) {
     appState.visited[id] = !appState.visited[id];
-    
+
     if (!appState.visited[id]) {
         delete appState.photos[id];
     }
-    
+
     saveState();
     renderSights();
-    
+
     // Dynamically update the map marker representation
     const sight = getSights().find(s => s.id === id);
     if (sight && map) {
@@ -678,14 +678,14 @@ window.toggleVisited = function(id) {
 };
 
 // Handle photo uploads with compression
-window.handlePhotoUpload = function(event, id) {
+window.handlePhotoUpload = function (event, id) {
     const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
             const canvas = document.createElement("canvas");
             const maxDimension = 800;
             let width = img.width;
@@ -721,7 +721,7 @@ window.handlePhotoUpload = function(event, id) {
 };
 
 // Delete photo
-window.deletePhoto = function(id) {
+window.deletePhoto = function (id) {
     if (confirm("Biztosan törlöd ezt az emlékfotót?")) {
         delete appState.photos[id];
         saveState();
@@ -730,7 +730,7 @@ window.deletePhoto = function(id) {
 };
 
 // Tab controller logic
-window.switchMainTab = function(tabId) {
+window.switchMainTab = function (tabId) {
     // Update button styling
     document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.classList.remove("active");
@@ -752,15 +752,15 @@ window.switchMainTab = function(tabId) {
 };
 
 // Day Filter Logic
-window.filterDay = function(day) {
+window.filterDay = function (day) {
     currentFilter = day.toString();
-    
+
     // Update filter active styling
     document.querySelectorAll(".filter-btn").forEach(btn => {
         btn.classList.remove("active");
     });
     event.currentTarget.classList.add("active");
-    
+
     renderSights();
 
     // Pan map to fit current filter markers
@@ -782,7 +782,7 @@ function renderChecklist() {
     appState.checklist.forEach(item => {
         const itemDiv = document.createElement("div");
         itemDiv.className = `checklist-item ${item.checked ? 'checked' : ''}`;
-        
+
         itemDiv.innerHTML = `
             <div class="checklist-item-left" onclick="toggleChecklistItem('${item.id}')">
                 <div class="checklist-checkbox">
@@ -798,7 +798,7 @@ function renderChecklist() {
     });
 }
 
-window.toggleChecklistItem = function(id) {
+window.toggleChecklistItem = function (id) {
     const item = appState.checklist.find(i => i.id === id);
     if (item) {
         item.checked = !item.checked;
@@ -807,7 +807,7 @@ window.toggleChecklistItem = function(id) {
     }
 };
 
-window.addChecklistItem = function() {
+window.addChecklistItem = function () {
     const input = document.getElementById("new-item-input");
     const text = input.value.trim();
     if (!text) return;
@@ -831,7 +831,7 @@ document.getElementById("new-item-input")?.addEventListener("keydown", (e) => {
     }
 });
 
-window.deleteChecklistItem = function(id) {
+window.deleteChecklistItem = function (id) {
     appState.checklist = appState.checklist.filter(i => i.id !== id);
     saveState();
     renderChecklist();
@@ -845,7 +845,7 @@ const modalCaption = document.getElementById("modal-caption");
 const modalClose = document.getElementById("modal-close");
 const modalBackdrop = document.getElementById("modal-backdrop");
 
-window.openPhotoModal = function(imgSrc, title) {
+window.openPhotoModal = function (imgSrc, title) {
     modalImg.src = imgSrc;
     modalCaption.textContent = title;
     modal.classList.add("active");
@@ -870,30 +870,30 @@ document.addEventListener("keydown", (e) => {
 // --- Weather Widget (Open-Meteo API – no key needed) ---
 
 const WMO_CODES = {
-    0:  { desc: "Derült ég",           emoji: "☀️" },
-    1:  { desc: "Főként napos",        emoji: "🌤️" },
-    2:  { desc: "Részben felhős",      emoji: "⛅" },
-    3:  { desc: "Borult",              emoji: "☁️" },
-    45: { desc: "Ködös",               emoji: "🌫️" },
-    48: { desc: "Jeges köd",           emoji: "🌫️" },
-    51: { desc: "Szitálás",            emoji: "🌦️" },
-    53: { desc: "Mérsékelt szitálás",  emoji: "🌦️" },
-    55: { desc: "Erős szitálás",       emoji: "🌧️" },
-    61: { desc: "Gyenge eső",          emoji: "🌧️" },
-    63: { desc: "Mérsékelt eső",       emoji: "🌧️" },
-    65: { desc: "Erős eső",            emoji: "🌧️" },
-    71: { desc: "Gyenge hóesés",       emoji: "🌨️" },
-    73: { desc: "Mérsékelt hóesés",    emoji: "🌨️" },
-    75: { desc: "Erős hóesés",         emoji: "❄️" },
-    77: { desc: "Hószemcsék",          emoji: "❄️" },
-    80: { desc: "Zápor",               emoji: "🌦️" },
-    81: { desc: "Mérsékelt zápor",     emoji: "🌧️" },
-    82: { desc: "Erős zápor",          emoji: "⛈️" },
-    85: { desc: "Hózápor",             emoji: "🌨️" },
-    86: { desc: "Erős hózápor",        emoji: "❄️" },
-    95: { desc: "Zivatar",             emoji: "⛈️" },
-    96: { desc: "Zivatar jégesővel",   emoji: "⛈️" },
-    99: { desc: "Erős zivatar",        emoji: "⛈️" },
+    0: { desc: "Derült ég", emoji: "☀️" },
+    1: { desc: "Főként napos", emoji: "🌤️" },
+    2: { desc: "Részben felhős", emoji: "⛅" },
+    3: { desc: "Borult", emoji: "☁️" },
+    45: { desc: "Ködös", emoji: "🌫️" },
+    48: { desc: "Jeges köd", emoji: "🌫️" },
+    51: { desc: "Szitálás", emoji: "🌦️" },
+    53: { desc: "Mérsékelt szitálás", emoji: "🌦️" },
+    55: { desc: "Erős szitálás", emoji: "🌧️" },
+    61: { desc: "Gyenge eső", emoji: "🌧️" },
+    63: { desc: "Mérsékelt eső", emoji: "🌧️" },
+    65: { desc: "Erős eső", emoji: "🌧️" },
+    71: { desc: "Gyenge hóesés", emoji: "🌨️" },
+    73: { desc: "Mérsékelt hóesés", emoji: "🌨️" },
+    75: { desc: "Erős hóesés", emoji: "❄️" },
+    77: { desc: "Hószemcsék", emoji: "❄️" },
+    80: { desc: "Zápor", emoji: "🌦️" },
+    81: { desc: "Mérsékelt zápor", emoji: "🌧️" },
+    82: { desc: "Erős zápor", emoji: "⛈️" },
+    85: { desc: "Hózápor", emoji: "🌨️" },
+    86: { desc: "Erős hózápor", emoji: "❄️" },
+    95: { desc: "Zivatar", emoji: "⛈️" },
+    96: { desc: "Zivatar jégesővel", emoji: "⛈️" },
+    99: { desc: "Erős zivatar", emoji: "⛈️" },
 };
 
 async function fetchOsloWeather() {
@@ -905,22 +905,22 @@ async function fetchOsloWeather() {
     try {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error("API hiba");
-        
+
         const data = await response.json();
         const current = data.current;
-        
+
         const code = current.weather_code;
         const weather = WMO_CODES[code] || { desc: "Ismeretlen", emoji: "🌡️" };
-        
+
         document.getElementById("weather-emoji").textContent = weather.emoji;
         document.getElementById("weather-temp").textContent = `${Math.round(current.temperature_2m)}°C`;
         document.getElementById("weather-desc").textContent = weather.desc;
         document.getElementById("weather-wind").textContent = `💨 ${Math.round(current.wind_speed_10m)} km/h`;
         document.getElementById("weather-humidity").textContent = `💧 ${current.relative_humidity_2m}%`;
-        
+
         document.getElementById("weather-loading").style.display = "none";
         document.getElementById("weather-content").style.display = "flex";
-        
+
     } catch (error) {
         console.error("Időjárás lekérése sikertelen:", error);
         document.getElementById("weather-loading").style.display = "none";
@@ -931,7 +931,7 @@ async function fetchOsloWeather() {
 // --- Gastronomy Functions ---
 
 function getCategoryLabel(category) {
-    switch(category) {
+    switch (category) {
         case 'bakery': return '☕ Kávé & Pékség';
         case 'traditional': return '🍲 Hagyományos';
         case 'seafood': return '🐟 Tengeri Hal/Rák';
@@ -959,10 +959,10 @@ function renderFoodCards() {
 
     filtered.forEach(food => {
         const isTried = !!appState.triedFoods[food.id];
-        
+
         const card = document.createElement("div");
         card.className = `food-card ${isTried ? 'tried' : ''}`;
-        
+
         card.innerHTML = `
             <div class="food-header">
                 <div class="food-emoji">${food.emoji}</div>
@@ -989,9 +989,9 @@ function renderFoodCards() {
 
             <button class="btn-tried-toggle" onclick="toggleFoodTried('${food.id}')">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    ${isTried 
-                        ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' 
-                        : '<circle cx="12" cy="12" r="10"/>'}
+                    ${isTried
+                ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+                : '<circle cx="12" cy="12" r="10"/>'}
                 </svg>
                 <span>${isTried ? 'Kipipálva (Megkóstoltad! 😋)' : 'Megkóstoltam!'}</span>
             </button>
@@ -1000,9 +1000,9 @@ function renderFoodCards() {
     });
 }
 
-window.filterFoodCategory = function(category) {
+window.filterFoodCategory = function (category) {
     currentFoodFilter = category;
-    
+
     // Update active button state
     document.querySelectorAll(".food-filters .filter-btn").forEach(btn => {
         btn.classList.remove("active");
@@ -1014,7 +1014,7 @@ window.filterFoodCategory = function(category) {
     renderFoodCards();
 };
 
-window.toggleFoodTried = function(id) {
+window.toggleFoodTried = function (id) {
     appState.triedFoods[id] = !appState.triedFoods[id];
     saveState();
     renderFoodCards();

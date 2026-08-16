@@ -1,16 +1,15 @@
-# Oslo Útitárs - Elkészült Fejlesztések
+# Oslo Útitárs - Mobil Nézet & UI Optimalizálás
 
-Az alkalmazás neve pontosítva: **Oslo Útitárs**.
+Alaposan átdolgoztam a mobil felületet, hogy a telefonos böngészőkben (iOS Safari / Android Chrome) alkalmazás-élményt nyújtson:
 
----
-
-## 📂 A projekt fájlszerkezete
-
-1. **[index.html](file:///c:/Users/simon/Desktop/Oslo/index.html)**: Cím frissítve **Oslo Útitárs** névre, reszponzív elrendezés az interaktív térképpel, a 3 fő füllel (*📍 Látnivalók*, *🍽️ Gasztronómiai Ajánló*, *🏨 Szálloda (Citybox)*, *Úti Tippek & Csekklista*).
-2. **[style.css](file:///c:/Users/simon/Desktop/Oslo/style.css)**: Sötét módú, prémium vizuális stílusok, egyedi gombok és kártyák.
-3. **[app.js](file:///c:/Users/simon/Desktop/Oslo/app.js)**: Logika: élő időjárás modul, Leaflet térkép, Citybox Oslo GPS navigáció, gasztronómiai ajánló, egyéni látnivaló kezelés.
-4. **[manifest.json](file:///c:/Users/simon/Desktop/Oslo/manifest.json)**: PWA beállítások frissítve az **Oslo Útitárs** névvel.
-5. **[sw.js](file:///c:/Users/simon/Desktop/Oslo/sw.js)**: Offline Service Worker (`oslo-utitars-cache-v8`).
+1. **📱 Vízszintesen Gördíthető (Swipeable) Navigációs Menü**:
+   - A menügombok (`📍 Látnivalók`, `🍽️ Gasztronómiai Ajánló`, `🏨 Szálloda`, `Úti Tippek`) mobilon egy görgethető, elegáns gombsorrá váltak, így sosem torzítják el az oldalt.
+2. **🗺️ Reszponzív Térkép & Gombok**:
+   - A térkép magassága és a GPS útvonaltervező gomb mobilon teljes szélességűvé és ujjbaráttá vált.
+3. **🎴 Kártyák & Gombok Érintésre Optimalizálva**:
+   - A látnivaló kártyák, fotófeltöltő és törlési gombok teljes szélességben kényelmesen megnyomhatók hüvelykujjal is.
+4. **💬 Mobilbarát Popupról & Modali-ról**:
+   - A felugró ablakok (*Citybox Szálloda*, *Fotó feltöltés*, *Képnézegető*) lekerekített Sarkokkal, mobil képernyőhöz igazított magassággal jelennek meg.
 
 ---
 

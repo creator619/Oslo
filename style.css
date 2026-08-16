@@ -151,7 +151,9 @@ h1 {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .weather-content {
@@ -661,7 +663,7 @@ h1 {
     justify-content: center;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Info and Checklist Tab Styles */
@@ -677,7 +679,8 @@ h1 {
     }
 }
 
-.checklist-card, .info-card {
+.checklist-card,
+.info-card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(12px);
@@ -1468,27 +1471,153 @@ h1 {
     color: #ffffff;
 }
 
-@media (max-width: 600px) {
-    .hotel-info-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Responsive fixes */
+/* --- High-end Mobile & Touch Responsiveness --- */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
     .app-header {
-        padding: 50px 20px 30px;
+        padding: 35px 16px 20px;
     }
+
+    h1 {
+        font-size: 2.1rem;
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+    }
+
+    .main-container {
+        padding: 0 12px 40px;
+    }
+
+    .map-header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btn-hotel-route-map {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        font-size: 0.92rem;
+    }
+
+    #map {
+        height: 320px;
+        border-radius: var(--radius-md);
+    }
+
+    /* Swipeable Horizontal Navigation Tabs on Mobile */
+    .nav-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 8px;
+        padding: 4px 2px 8px;
+        margin-bottom: 20px;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-tabs .tab-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 10px 16px;
+        font-size: 0.88rem;
+        border-radius: 20px;
+    }
+
+    .itinerary-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btn-add-sight {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+        font-size: 0.95rem;
+    }
+
+    .toolbar-secondary-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-toolbar-subtle {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+    }
+
     .sights-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
-    #map {
-        height: 300px;
+
+    .sight-card {
+        border-radius: 16px;
     }
-    .day-filters {
+
+    .sight-image-container {
+        height: 190px;
+    }
+
+    .sight-info {
+        padding: 16px;
+    }
+
+    .sight-title {
+        font-size: 1.25rem;
+    }
+
+    .sight-actions {
+        gap: 10px;
+    }
+
+    .btn-visit-toggle,
+    .photo-upload-label,
+    .btn-delete-sight {
+        width: 100%;
         justify-content: center;
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 94%;
+        padding: 20px 16px;
+        max-height: 88vh;
+        border-radius: 20px;
+    }
+
+    .hotel-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .food-filters {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 6px;
+    }
+
+    .food-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .food-filters .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 }

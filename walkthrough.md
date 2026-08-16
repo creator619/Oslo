@@ -1,25 +1,35 @@
-# Oslo Travel Companion - Elkészült Fejlesztések
+# Oslo Travel Companion - Elkészült Fejlesztések & Egyszerűsített Látnivalók Nézet
 
-Az alkalmazást kibővítettem a megbeszélt prémium, professzionális funkciókkal a `c:\Users\simon\Desktop\Oslo` mappában.
+Az alkalmazásból kiszedtem a napi tervek szűrőit (`1-4. Nap`), és leegyszerűsítettem a felületet egyetlen letisztult **📍 Látnivalók** fülre.
 
-## A projekt fájlszerkezete
+---
 
-1. **[index.html](file:///c:/Users/simon/Desktop/Oslo/index.html)**: Frissített elrendezés a térkép és a füles navigáció (útiterv vs. csekklista) befogadására, valamint a PWA manifest bekötésével.
-2. **[style.css](file:///c:/Users/simon/Desktop/Oslo/style.css)**: Kiegészítve a térkép, a szűrőgombok és a dinamikus pakolási lista prémium stílusaival.
-3. **[app.js](file:///c:/Users/simon/Desktop/Oslo/app.js)**: Kiegészítve a Leaflet térképkezeléssel, a napi tervek szűrésével, valamint a csekklista állapotának mentésével.
-4. **[manifest.json](file:///c:/Users/simon/Desktop/Oslo/manifest.json)**: A Progressive Web App beállításai (a telefon főképernyőjére telepíthetőséghez).
-5. **[sw.js](file:///c:/Users/simon/Desktop/Oslo/sw.js)**: Service Worker, amely letölti és elmenti a böngésző gyorsítótárába (cache) az összes forrásfájlt, képet és a térkép kódjait, így a program **teljesen offline** (mobilnet nélkül) is működőképes marad az utazás alatt.
+## 📂 A projekt frissített fájlszerkezete
 
-## Megvalósított új funkciók
+1. **[index.html](file:///c:/Users/simon/Desktop/Oslo/index.html)**: Főnavigációs gomb átnevezve **📍 Látnivalók** névre, a napok szerinti alcím-gombok törölve.
+2. **[style.css](file:///c:/Users/simon/Desktop/Oslo/style.css)**: Frissített stílusok az átlátható, letisztult látnivalók gridhez és gombokhoz.
+3. **[app.js](file:///c:/Users/simon/Desktop/Oslo/app.js)**: A napi szűrés eltávolítva; az összes látnivaló egyetlen áttekinthető listában és a térképen jelenik meg.
+4. **[manifest.json](file:///c:/Users/simon/Desktop/Oslo/manifest.json)**: Progressive Web App beállítások.
+5. **[sw.js](file:///c:/Users/simon/Desktop/Oslo/sw.js)**: Frissített Service Worker (v5) az offline támogatáshoz.
 
-- **Interaktív Térkép**: A lap tetején lévő térképen számozott gombostűk jelölik az egyes látnivalókat (a nap sorszámával). Ha a barátnőd meglátogatottnak jelöl egy helyet, a gombostű színe azonnal élénkzöldre változik és egy pipa (✓) jelenik meg rajta.
-- **Napi Útiterv (Day 1-2-3)**: A látnivalók csoportosítva vannak napok szerint (Belváros, Múzeumok félszigete, Parkok & Panoráma), így könnyen átlátható a napi program.
-- **Pakolási Csekklista**: Egy interaktív pipálható lista a legfontosabb dolgokkal (útlevél, esőkabát, kulacs stb.), ahová saját elemeket is fel lehet venni vagy törölni lehet őket. Az állapot szintén a helyi tárhelyre mentődik.
-- **Hasznos Tudnivalók**: Oslói tippek a helyi közlekedésről (Ruter app), a készpénzmentes fizetésről és a csapvízről.
+---
 
-## Hogyan telepíthető a telefonra (PWA)?
-1. Nyissátok meg a **[index.html](file:///c:/Users/simon/Desktop/Oslo/index.html)** fájlt a böngészőben.
-2. Ha mobilon nyitjátok meg (pl. Chrome-ban vagy Safari-ban):
-   - **Android / Chrome**: Kattintsatok a menüre (három pont), majd a "Hozzáadás a kezdőképernyőhöz" vagy "Alkalmazás telepítése" lehetőségre.
-   - **iOS / Safari**: Kattintsatok a Megosztás gombra (felfelé mutató nyíl), majd a "Főképernyőhöz adás" lehetőségre.
-3. Ezután az alkalmazás külön ikonként jelenik meg a telefonon, saját ablakban nyílik meg (fejléc nélkül), és internetkapcsolat nélkül is teljesen működőképes marad!
+## ✨ A Letisztult "Látnivalók" Nézet Funkciói
+
+- **📍 Letisztult Látnivalók Fül**:
+  - Megszűntek a napi bontású gombok (1. nap, 2. nap...), az összes látnivaló egyetlen könnyen átlátható felületen érhető el.
+- **➕ Saját Látnivalók Hozzáadása (`+ Új Látnivaló Hozzáadása`)**:
+  - Tetszőleges új helyszínt vagy programot adhattok hozzá (Név, Cím, Leírás/Jegyzet, Emoji).
+- **🗑️ Egyedi Látnivaló Törlése (`Látnivaló törlése`)**:
+  - Bármelyik kártyát törölhetitek, amit nem szeretnétek meglátogatni.
+- **🧹 Tiszta Lap (`Tiszta lap / Összes törlése`)**:
+  - Ha teljesen nulláról szeretnétek felépíteni a saját oslói listátokat.
+- **🔄 Ajánló Visszaállítása**:
+  - Az eredeti oslói látnivalók egy kattintással bármikor visszahozhatók.
+- **🗺️ Google Maps Navigáció**:
+  - Minden látnivaló címére vagy a térkép jelölőire kattintva azonnal megnyílik a Google Maps navigáció.
+
+---
+
+## 📱 Telepítés a telefonra (PWA)
+Nyissátok meg az **[index.html](file:///c:/Users/simon/Desktop/Oslo/index.html)** fájlt a böngészőben, és adjátok hozzá a kezdőképernyőhöz az offline használathoz!

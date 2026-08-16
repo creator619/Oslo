@@ -75,19 +75,27 @@
 
         <!-- Main Tab Navigation -->
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchMainTab('itinerary')">Útiterv & Látnivalók</button>
+            <button class="tab-btn active" onclick="switchMainTab('itinerary')">📍 Látnivalók</button>
+            <button class="tab-btn" onclick="switchMainTab('gastronomy')">🍽️ Gasztronómiai Ajánló</button>
             <button class="tab-btn" onclick="switchMainTab('checklist')">Úti Tippek & Csekklista</button>
         </div>
 
-        <!-- Tab 1: Itinerary and Sights -->
+        <!-- Tab 1: Sights -->
         <div id="tab-itinerary" class="tab-content active">
-            <!-- Day Filter Tabs -->
-            <div class="day-filters">
-                <button class="filter-btn active" onclick="filterDay('all')">Minden látnivaló</button>
-                <button class="filter-btn" onclick="filterDay(1)">1. Nap: Belváros</button>
-                <button class="filter-btn" onclick="filterDay(2)">2. Nap: Múzeumok félszigete</button>
-                <button class="filter-btn" onclick="filterDay(3)">3. Nap: Parkok & Panoráma</button>
-                <button class="filter-btn" onclick="filterDay(4)">4. Nap: Negyedek & Ízek</button>
+            <!-- Action Toolbar for Sights -->
+            <div class="itinerary-toolbar">
+                <button class="btn-add-sight" onclick="openAddSightModal()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <span>+ Új Látnivaló Hozzáadása</span>
+                </button>
+                <div class="toolbar-secondary-actions">
+                    <button class="btn-toolbar-subtle danger" onclick="clearAllSights()" title="Összes látnivaló törlése (tiszta lap indítása)">
+                        🗑️ Tiszta lap (Összes törlése)
+                    </button>
+                    <button class="btn-toolbar-subtle" onclick="resetDefaultSights()" title="Eredeti oslói látnivalók visszaállítása">
+                        🔄 Ajánló visszaállítása
+                    </button>
+                </div>
             </div>
 
             <div class="sights-grid" id="sights-grid">
@@ -134,6 +142,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Tab 3: Gastronomy & Food Guide -->
+        <div id="tab-gastronomy" class="tab-content">
+            <!-- Food Category Filters -->
+            <div class="day-filters food-filters">
+                <button class="filter-btn active" onclick="filterFoodCategory('all')">Mind (Összes)</button>
+                <button class="filter-btn" onclick="filterFoodCategory('bakery')">☕ Kávézók & Pékségek</button>
+                <button class="filter-btn" onclick="filterFoodCategory('traditional')">🍲 Hagyományos Ételek</button>
+                <button class="filter-btn" onclick="filterFoodCategory('seafood')">🐟 Tenger Gyümölcsei</button>
+                <button class="filter-btn" onclick="filterFoodCategory('streetfood')">🥪 Street Food & Piacok</button>
+                <button class="filter-btn" onclick="filterFoodCategory('bars')">🍹 Bárok & Sörözők</button>
+            </div>
+
+            <!-- Food Grid -->
+            <div class="sights-grid food-grid" id="food-grid">
+                <!-- Dynamic food cards here -->
+            </div>
+
+            <!-- Norwegian Culinary Tips Card -->
+            <div class="info-card food-info-card">
+                <h3 class="card-heading">🇳🇴 Norvég Gasztro-Kisokos & Tudnivalók</h3>
+                <ul class="info-list">
+                    <li>
+                        <strong class="info-highlight">🧀 Brunost (Barna Saajt):</strong> Édeskés, karamellás ízű kecske/tehénsajt. Legjobb vékonyra gyalulva (*ostehøvel* sajtgyaluval) meleg szív-gofrire vagy barna kenyérre.
+                    </li>
+                    <li>
+                        <strong class="info-highlight">☕ Kávékultúra:</strong> Norvégia a világ egyik legnagyob kávéfogyasztója. A világos pörkölésű (*light roast*) filterkávét részesítik előnyben, ami gyümölcsös és tejes hozzáadás nélkül is selymes.
+                    </li>
+                    <li>
+                        <strong class="info-highlight">🍷 Vinmonopolet (Alkoholvásárlás):</strong> 4.7% feletti alkoholt kizárólag az állami **Vinmonopolet** szaküzletekben lehet venni! Szombaton 15:00-kor bezárnak, vasárnap zárva tartanak.
+                    </li>
+                    <li>
+                        <strong class="info-highlight">🍞 Matpakke:</strong> A híres norvég nyitott szendvics hagyománya. Egyszerű, egészséges és praktikus kirándulásokhoz!
+                    </li>
+                </ul>
+            </div>
+        </div>
     </main>
 
     <!-- Modal for viewing full memory image -->
@@ -147,6 +192,47 @@
                 <img id="modal-img" src="" alt="Teljes méretű kép">
             </div>
             <div class="modal-caption" id="modal-caption">Látványosság neve</div>
+        </div>
+    </div>
+
+    <!-- Modal for adding custom sight/activity -->
+    <div class="modal" id="add-sight-modal">
+        <div class="modal-backdrop" id="add-sight-backdrop" onclick="closeAddSightModal()"></div>
+        <div class="modal-content add-sight-modal-content">
+            <button class="modal-close" onclick="closeAddSightModal()" aria-label="Bezárás">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <h3 class="modal-form-title">✨ Új Program Hozzáadása az Útitervhez</h3>
+            <form id="add-sight-form" onsubmit="handleCustomSightSubmit(event)">
+                <div class="form-group">
+                    <label for="sight-title-input">Program / Látnivaló neve *</label>
+                    <input type="text" id="sight-title-input" required placeholder="pl. Fjordi Szauna & Csobbanás">
+                </div>
+                <div class="form-group">
+                    <label for="sight-address-input">Cím / Helyszín *</label>
+                    <input type="text" id="sight-address-input" required placeholder="pl. Langkaia 1, 0150 Oslo">
+                </div>
+                <div class="form-group">
+                    <label for="sight-desc-input">Leírás / Saját jegyzet</label>
+                    <textarea id="sight-desc-input" rows="3" placeholder="pl. Szaunafoglalás 16:00-ra, vigyünk törölközőt és fürdőruhát!"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="sight-emoji-select">Ikon / Emoji</label>
+                    <select id="sight-emoji-select">
+                        <option value="📍">📍 Helyszín</option>
+                        <option value="🧖‍♂️">🧖‍♂️ Szauna / Wellness</option>
+                        <option value="☕">☕ Kávézó / Reggeli</option>
+                        <option value="🍕">🍕 Étterem / Vacsora</option>
+                        <option value="⛵">⛵ Komp / Sétahajó</option>
+                        <option value="🛍️">🛍️ Vásárlás / Séta</option>
+                        <option value="📸">📸 Fotózás / Panoráma</option>
+                        <option value="🎨">🎨 Múzeum / Galéria</option>
+                        <option value="🌲">🌲 Park / Természet</option>
+                        <option value="🎵">🎵 Koncert / Bár</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit-sight">Látnivaló Mentése ✨</button>
+            </form>
         </div>
     </div>
 

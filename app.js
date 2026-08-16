@@ -46,16 +46,172 @@ const PRESET_CHECKLIST = [
     { id: "item-8", text: "Meleg pulóver (északi szél ellen)", checked: false }
 ];
 
+const FOOD_DATA = [
+    {
+        id: "haraldsvaffel",
+        title: "Norvég Gofri Brunost-tal",
+        norwegian: "Norsk vaffel med brunost & rømme",
+        emoji: "🧇",
+        category: "bakery",
+        price: "kr",
+        description: "A norvég gofri szív alakú, puha édesség, amelyet édes-karamellás barnasajttal (Brunost) és tejszínnel/tejföllel vagy eperlekvárral tálalnak. Kihagyhatatlan oslói élmény!",
+        place: "Haralds Vaffel (Grünerløkka)",
+        mapsLink: "https://maps.google.com/?q=Haralds+Vaffel+Oslo"
+    },
+    {
+        id: "reker_loff",
+        title: "Friss Rákszendvics",
+        norwegian: "Reker på loff med majones og sitron",
+        emoji: "🦐",
+        category: "seafood",
+        price: "kr kr",
+        description: "A norvégok nyári klasszikusa: puha fehér kenyéren rengeteg friss oslófjord-i garnélarák, házi majonéz, kapor és friss citromlé.",
+        place: "Fiskeriet Youngstorget / Aker Brygge móló",
+        mapsLink: "https://maps.google.com/?q=Fiskeriet+Youngstorget+Oslo"
+    },
+    {
+        id: "kanelboller",
+        title: "Kanelboller (Kardamomos-Fahéjas Csiga)",
+        norwegian: "Kanelboller / Skillingsboller",
+        emoji: "🥐",
+        category: "bakery",
+        price: "kr",
+        description: "Norvégia legnépszerűbb péksüteménye! Frissen sülve, őrölt kardamommal és fűszeres fahéjjal az igazi 'koselig' kuckózós életérzés.",
+        place: "W.B. Samson / Åpent Bakeri",
+        mapsLink: "https://maps.google.com/?q=WB+Samson+Oslo"
+    },
+    {
+        id: "kjottkaker",
+        title: "Kjøttkaker (Hagyományos Norvég Húsgombóc)",
+        norwegian: "Kjøttkaker med brun saus og tyttebær",
+        emoji: "🧆",
+        category: "traditional",
+        price: "kr kr",
+        description: "Norvégia házias komfortétele: szaftos fűszeres marha/sertéshús pogácsák sűrű barna mártással, burgonyapürével és friss vörösáfonya lekvárral.",
+        place: "Kaffistova (Rosenkrantz' gate 8, 1901 óta nyitva!)",
+        mapsLink: "https://maps.google.com/?q=Kaffistova+Oslo"
+    },
+    {
+        id: "timwendelboe",
+        title: "Tim Wendelboe Specialty Kávé",
+        norwegian: "Skandinavisk Kaffekultur",
+        emoji: "☕",
+        category: "bakery",
+        price: "kr kr",
+        description: "World Barista Bajnok kávépörkölője Grünerløkkán. A világos pörkölésű, gyümölcsös és tejes kiegészítés nélkül is selymes kávék nemzetközi szentélye.",
+        place: "Tim Wendelboe (Grüners gate 1)",
+        mapsLink: "https://maps.google.com/?q=Tim+Wendelboe+Oslo"
+    },
+    {
+        id: "mathallen",
+        title: "Mathallen Oslo Street Food Vásárcsarnok",
+        norwegian: "Mathallen Vulkan",
+        emoji: "🥪",
+        category: "streetfood",
+        price: "kr kr",
+        description: "Több mint 30 specializált ételstand a felújított gyárcsarnokban: norvég sajtboltok, lazacos falatok, kézműves sörök és nemzetközi ízek egy helyen.",
+        place: "Mathallen Oslo (Vulkan 5)",
+        mapsLink: "https://maps.google.com/?q=Mathallen+Oslo"
+    },
+    {
+        id: "fiskesuppe",
+        title: "Krémes Oslói Hallé",
+        norwegian: "Kremet Bergensk/Norsk Fiskesuppe",
+        emoji: "🍲",
+        category: "seafood",
+        price: "kr kr",
+        description: "Selymes, tejszínes hallé tőkehallal, lazaccal, julienne zöldségekkel és kaporral tálalva. A friss tengerparti séta után tökéletesen felmelegít.",
+        place: "Fiskeriet Youngstorget / Lofoten Fiskerestaurant",
+        mapsLink: "https://maps.google.com/?q=Fiskeriet+Youngstorget+Oslo"
+    },
+    {
+        id: "fuglen",
+        title: "Fuglen Kávézó & Retró Koktélbár",
+        norwegian: "Fuglen Oslo (1963 óta)",
+        emoji: "🍹",
+        category: "bars",
+        price: "kr kr",
+        description: "Nappal csúcsminőségű kávézó, este ikonikus vintage koktélbár 1950-es évekbeli skandináv bútorokkal díszítve.",
+        place: "Fuglen (Universitetsgata 2)",
+        mapsLink: "https://maps.google.com/?q=Fuglen+Oslo"
+    },
+    {
+        id: "rokt_laks",
+        title: "Prémium Füstölt & Gravlax Lazac",
+        norwegian: "Røkt Laks & Gravlaks",
+        emoji: "🐟",
+        category: "traditional",
+        price: "kr kr",
+        description: "Bükkfán selymesre füstölt vagy kaporral és mustárral pácolt norvég lazac (Gravlaks) tojáslepényen vagy rozskenyéren felejthetetlen finomság.",
+        place: "Fenaknoken / Mathallen Oslo",
+        mapsLink: "https://maps.google.com/?q=Fenaknoken+Oslo"
+    },
+    {
+        id: "skolebrod",
+        title: "Skolebrød (Kókuszos-Pudingos Zsemle)",
+        norwegian: "Skolebolle / Skolebrød",
+        emoji: "🧁",
+        category: "bakery",
+        price: "kr",
+        description: "Klasszikus norvég péksütemény: édes vaníliapudinggal a közepén, selymes cukormázzal és pirított kókuszreszelékkel borítva.",
+        place: "W.B. Samson / Åpent Bakeri",
+        mapsLink: "https://maps.google.com/?q=WB+Samson+Oslo"
+    },
+    {
+        id: "vippa",
+        title: "Vippa Fjordparti Street Food Csarnok",
+        norwegian: "Vippa Oslo",
+        emoji: "🥪",
+        category: "streetfood",
+        price: "kr kr",
+        description: "Közvetlenül az Oslófjord partján álló egykori raktárépület, ahol fenntartható és nemzetközi street food falatokat kóstolhattok fantasztikus kilátással.",
+        place: "Vippa (Akershusstranda 25)",
+        mapsLink: "https://maps.google.com/?q=Vippa+Oslo"
+    },
+    {
+        id: "crowbar",
+        title: "Crow Bar & Bryggeri (Kézműves Sörfőzde)",
+        norwegian: "Crowbar Oslo",
+        emoji: "🍺",
+        category: "bars",
+        price: "kr kr",
+        description: "Oslo egyik legnépszerűbb kézműves sörözője, ahol a helyben főzött norvég IPA-k és stoutok mellett házi lassan sült malacot is kínálnak.",
+        place: "Crow Bar (Torggata 32)",
+        mapsLink: "https://maps.google.com/?q=Crow+Bar+Oslo"
+    },
+    {
+        id: "frognerseteren_pie",
+        title: "Frognerseteren Tradicionális Áfonyatorta",
+        norwegian: "Frognerseteren Kafé",
+        emoji: "🥧",
+        category: "traditional",
+        price: "kr kr kr",
+        description: "A hegytetőn, tradicionális faépületben kínált házi almatorta és áfonyatorta lágy vaníliaöntettel – Oslo legjobb panorámájával kísérve.",
+        place: "Frognerseteren (Holmenkollveien 200)",
+        mapsLink: "https://maps.google.com/?q=Frognerseteren+Oslo"
+    }
+];
+
 // App State
 let appState = {
     visited: {},
     photos: {},
-    checklist: [...PRESET_CHECKLIST]
+    checklist: [...PRESET_CHECKLIST],
+    triedFoods: {},
+    sights: [...SIGHTS_DATA]
 };
 
 let map = null;
 let markers = {};
 let currentFilter = "all";
+let currentFoodFilter = "all";
+
+function getSights() {
+    if (!appState.sights) {
+        appState.sights = [...SIGHTS_DATA];
+    }
+    return appState.sights;
+}
 
 // Initialize Leaflet Map
 function initMap() {
@@ -69,8 +225,19 @@ function initMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Create markers for each sight
-    SIGHTS_DATA.forEach(sight => {
+    rebuildAllMapMarkers();
+}
+
+function rebuildAllMapMarkers() {
+    if (!map) return;
+    // Clear existing markers
+    Object.keys(markers).forEach(id => {
+        if (markers[id]) map.removeLayer(markers[id]);
+    });
+    markers = {};
+
+    // Create markers for current sights
+    getSights().forEach(sight => {
         updateMapMarker(sight);
     });
 }
@@ -109,7 +276,7 @@ function updateMapMarker(sight) {
                 font-weight: 800; 
                 font-size: ${isVisited ? '12px' : '10px'};
             ">
-                ${isVisited ? '✓' : sight.day}
+                ${isVisited ? '✓' : '📍'}
             </div>
         </div>`,
         className: 'custom-map-pin',
@@ -121,9 +288,12 @@ function updateMapMarker(sight) {
     
     marker.bindPopup(`
         <div style="font-family: 'Outfit', sans-serif;">
-            <strong style="font-size: 1.05rem;">${sight.title}</strong><br>
-            <span style="font-size: 0.8rem; color: #a3b1c6;">${sight.address}</span><br>
-            <span style="font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">${sight.day}. Nap útiterv</span>
+            <strong style="font-size: 1.05rem; color: #0b132b;">${sight.title}</strong><br>
+            <span style="font-size: 0.8rem; color: #4a5568;">${sight.address}</span><br>
+            <div style="margin-top: 6px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <span style="font-size: 0.8rem; color: #0077b6; font-weight: 600;">📍 Oslo Látnivaló</span>
+                <a href="https://maps.google.com/?q=${encodeURIComponent(sight.title + ' ' + sight.address)}" target="_blank" rel="noopener" style="font-size: 0.8rem; color: #00b4d8; font-weight: bold; text-decoration: none;">Maps ↗</a>
+            </div>
         </div>
     `);
 
@@ -139,6 +309,8 @@ function loadState() {
             if (!appState.visited) appState.visited = {};
             if (!appState.photos) appState.photos = {};
             if (!appState.checklist) appState.checklist = [...PRESET_CHECKLIST];
+            if (!appState.triedFoods) appState.triedFoods = {};
+            if (!appState.sights) appState.sights = [...SIGHTS_DATA];
         } catch (e) {
             console.error("Nem sikerült betölteni az állapotot", e);
         }
@@ -153,8 +325,9 @@ function saveState() {
 
 // Update top progress bar
 function updateProgress() {
-    const total = SIGHTS_DATA.length;
-    const visitedCount = Object.keys(appState.visited).filter(id => appState.visited[id]).length;
+    const sights = getSights();
+    const total = sights.length;
+    const visitedCount = Object.keys(appState.visited).filter(id => appState.visited[id] && sights.some(s => s.id === id)).length;
     const percent = total > 0 ? Math.round((visitedCount / total) * 100) : 0;
     
     document.getElementById("progress-bar").style.width = `${percent}%`;
@@ -164,19 +337,24 @@ function updateProgress() {
 // Render sight cards
 function renderSights() {
     const container = document.getElementById("sights-grid");
+    if (!container) return;
     container.innerHTML = "";
 
-    const filtered = SIGHTS_DATA.filter(sight => {
-        if (currentFilter === "all") return true;
-        return sight.day === parseInt(currentFilter);
-    });
+    const sights = getSights();
 
-    if (filtered.length === 0) {
-        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Nincs látnivaló ehhez a szűrőhöz.</p>`;
+    if (sights.length === 0) {
+        container.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; background: rgba(255,255,255,0.02); border-radius: var(--radius-md); border: 1px dashed rgba(255,255,255,0.1);">
+                <p style="font-size: 1.1rem; margin-bottom: 18px; color: #e0e1dd;">Jelenleg nincsenek látnivalók felvéve. Szeretnél új látnivalót hozzáadni, vagy visszaállítani az eredeti oslói ajánlót?</p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn-add-sight" onclick="openAddSightModal()">+ Új Látnivaló Hozzáadása</button>
+                    <button class="btn-add-sight" onclick="resetDefaultSights()" style="background: linear-gradient(135deg, #48cae4, #0077b6); color: #ffffff;">🔄 Eredeti Ajánló Visszaállítása</button>
+                </div>
+            </div>`;
         return;
     }
 
-    filtered.forEach(sight => {
+    sights.forEach(sight => {
         const isVisited = !!appState.visited[sight.id];
         const userPhoto = appState.photos[sight.id] || "";
 
@@ -198,10 +376,11 @@ function renderSights() {
             </div>
             <div class="sight-info">
                 <h3 class="sight-title">${sight.title}</h3>
-                <div class="sight-address">
+                <a href="https://maps.google.com/?q=${encodeURIComponent(sight.title + ' ' + sight.address)}" target="_blank" rel="noopener" class="sight-address" title="Megnyitás Google Maps-ben">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px; vertical-align: middle;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <span>${sight.address}</span>
-                </div>
+                    <span class="maps-link-icon">↗</span>
+                </a>
                 <p class="sight-description">${sight.description}</p>
                 
                 <div class="sight-actions">
@@ -230,12 +409,98 @@ function renderSights() {
                             </label>
                         `}
                     </div>
+
+                    <button class="btn-delete-sight" onclick="deleteSight('${sight.id}')" title="Látnivaló törlése">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        <span>Látnivaló törlése</span>
+                    </button>
                 </div>
             </div>
         `;
         container.appendChild(card);
     });
 }
+
+// Custom Sight Manager Functions
+window.openAddSightModal = function() {
+    document.getElementById("add-sight-modal").classList.add("active");
+};
+
+window.closeAddSightModal = function() {
+    document.getElementById("add-sight-modal").classList.remove("active");
+    document.getElementById("add-sight-form").reset();
+};
+
+window.handleCustomSightSubmit = function(e) {
+    e.preventDefault();
+    const title = document.getElementById("sight-title-input").value.trim();
+    const address = document.getElementById("sight-address-input").value.trim();
+    const desc = document.getElementById("sight-desc-input").value.trim();
+    const emoji = document.getElementById("sight-emoji-select").value;
+
+    if (!title || !address) return;
+
+    // Approximate lat/lon near Oslo center for map pin
+    const lat = 59.9139 + (Math.random() - 0.5) * 0.03;
+    const lon = 10.7522 + (Math.random() - 0.5) * 0.03;
+
+    const newSight = {
+        id: "custom-" + Date.now(),
+        title: title,
+        address: address,
+        description: desc || "Saját egyéni látnivaló.",
+        emoji: emoji,
+        lat: lat,
+        lon: lon,
+        day: 1,
+        isCustom: true
+    };
+
+    if (!appState.sights) appState.sights = [...SIGHTS_DATA];
+    appState.sights.push(newSight);
+
+    saveState();
+    renderSights();
+    rebuildAllMapMarkers();
+    closeAddSightModal();
+};
+
+window.deleteSight = function(id) {
+    const sight = getSights().find(s => s.id === id);
+    if (!sight) return;
+
+    if (confirm(`Biztosan törlöd a(z) "${sight.title}" programot az útitervből?`)) {
+        if (!appState.sights) appState.sights = [...SIGHTS_DATA];
+        appState.sights = appState.sights.filter(s => s.id !== id);
+        delete appState.visited[id];
+        delete appState.photos[id];
+
+        saveState();
+        renderSights();
+        rebuildAllMapMarkers();
+    }
+};
+
+window.clearAllSights = function() {
+    if (confirm("Biztosan TÖRÖLNI szeretnéd az összes programot? Így tiszta lappal indíthatsz és saját útitervet építhetsz fel!")) {
+        appState.sights = [];
+        appState.visited = {};
+        appState.photos = {};
+
+        saveState();
+        renderSights();
+        rebuildAllMapMarkers();
+    }
+};
+
+window.resetDefaultSights = function() {
+    if (confirm("Visszaállítod az eredeti oslói ajánlott látnivalókat az útitervbe?")) {
+        appState.sights = [...SIGHTS_DATA];
+        saveState();
+        renderSights();
+        rebuildAllMapMarkers();
+    }
+};
 
 // Toggle visited state
 window.toggleVisited = function(id) {
@@ -249,7 +514,7 @@ window.toggleVisited = function(id) {
     renderSights();
     
     // Dynamically update the map marker representation
-    const sight = SIGHTS_DATA.find(s => s.id === id);
+    const sight = getSights().find(s => s.id === id);
     if (sight && map) {
         updateMapMarker(sight);
     }
@@ -343,7 +608,7 @@ window.filterDay = function(day) {
 
     // Pan map to fit current filter markers
     if (map) {
-        const activeSights = SIGHTS_DATA.filter(s => currentFilter === "all" || s.day.toString() === currentFilter);
+        const activeSights = getSights().filter(s => (currentFilter === "all" || s.day.toString() === currentFilter) && markers[s.id]);
         if (activeSights.length > 0) {
             const group = new L.featureGroup(activeSights.map(s => markers[s.id]));
             map.fitBounds(group.getBounds().pad(0.15));
@@ -506,9 +771,102 @@ async function fetchOsloWeather() {
     }
 }
 
+// --- Gastronomy Functions ---
+
+function getCategoryLabel(category) {
+    switch(category) {
+        case 'bakery': return '☕ Kávé & Pékség';
+        case 'traditional': return '🍲 Hagyományos';
+        case 'seafood': return '🐟 Tengeri Hal/Rák';
+        case 'streetfood': return '🥪 Street Food';
+        case 'bars': return '🍹 Bár & Sör';
+        default: return '🍽️ Étel';
+    }
+}
+
+function renderFoodCards() {
+    const container = document.getElementById("food-grid");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const filtered = FOOD_DATA.filter(item => {
+        if (currentFoodFilter === "all") return true;
+        return item.category === currentFoodFilter;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Nincs gasztronómiai ajánlat ebben a kategóriában.</p>`;
+        return;
+    }
+
+    filtered.forEach(food => {
+        const isTried = !!appState.triedFoods[food.id];
+        
+        const card = document.createElement("div");
+        card.className = `food-card ${isTried ? 'tried' : ''}`;
+        
+        card.innerHTML = `
+            <div class="food-header">
+                <div class="food-emoji">${food.emoji}</div>
+                <div class="food-title-group">
+                    <h3 class="food-title">${food.title}</h3>
+                    <div class="food-norwegian-name">${food.norwegian}</div>
+                </div>
+            </div>
+
+            <div class="food-badges">
+                <span class="badge-price">${food.price}</span>
+                <span class="badge-category">${getCategoryLabel(food.category)}</span>
+                ${isTried ? '<span class="badge-tried">Megkóstolva ✓</span>' : ''}
+            </div>
+
+            <p class="sight-description">${food.description}</p>
+
+            <div class="food-place">
+                <span>📍 ${food.place}</span>
+                <a href="${food.mapsLink}" target="_blank" rel="noopener">
+                    Térkép ↗
+                </a>
+            </div>
+
+            <button class="btn-tried-toggle" onclick="toggleFoodTried('${food.id}')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    ${isTried 
+                        ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' 
+                        : '<circle cx="12" cy="12" r="10"/>'}
+                </svg>
+                <span>${isTried ? 'Kipipálva (Megkóstoltad! 😋)' : 'Megkóstoltam!'}</span>
+            </button>
+        `;
+        container.appendChild(card);
+    });
+}
+
+window.filterFoodCategory = function(category) {
+    currentFoodFilter = category;
+    
+    // Update active button state
+    document.querySelectorAll(".food-filters .filter-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add("active");
+    }
+
+    renderFoodCards();
+};
+
+window.toggleFoodTried = function(id) {
+    appState.triedFoods[id] = !appState.triedFoods[id];
+    saveState();
+    renderFoodCards();
+};
+
 // App Startup
 loadState();
 renderSights();
+renderFoodCards();
 renderChecklist();
 updateProgress();
 fetchOsloWeather();

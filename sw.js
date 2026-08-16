@@ -1,4 +1,4 @@
-const CACHE_NAME = 'oslo-utitars-cache-v19';
+const CACHE_NAME = 'oslo-utitars-cache-v20';
 const ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,8 @@ const ASSETS = [
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon.png',
+  './apple-touch-icon-precomposed.png',
+  './favicon.png',
   './img/vigeland.jpg',
   './img/opera.jpg',
   './img/munch.jpg',

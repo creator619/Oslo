@@ -3,19 +3,20 @@
   "short_name": "Oslo Útitárs",
   "description": "Interaktív útinapló, térkép és kalauz Oslo látványosságaihoz és szállodájához.",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0b132b",
   "theme_color": "#0b132b",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "./icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "./icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

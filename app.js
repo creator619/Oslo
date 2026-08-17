@@ -1,6 +1,7 @@
 // Oslo Travel Companion data & state manager
 const SIGHTS_DATA = [
     // --- 1. NAP: Belváros & Fjordpart ---
+    { id: "tullinlokka_light", title: "Tullinløkka Fényinstalláció (Street Light)", address: "Kristian Augusts gate 13, 0164 Oslo", description: "A Void dizájnstúdió által megálmodott modern interaktív fényművészeti installáció Oslo belvárosában. A sétálóutca burkolatába süllyesztett kanyargó LED-csíkok mozgásérzékelők segítségével hullámzó fényeket keltve reagálnak a járókelők lépteire. Lenyűgöző éjszakai látvány és fotóspot.", emoji: "✨", image: "img/tullinlokka_light.jpg", lat: 59.9161, lon: 10.7368, day: 1 },
     { id: "opera", title: "Oslói Operaház", address: "Kirsten Flagstads Plass 1, 0150 Oslo", description: "A fjordból kiemelkedő, jéghegyet mintázó hófehér márvány épület. Különlegessége, hogy a látogatók szabadon felsétálhatnak a tetőre, ahonnan csodálatos panoráma nyílik az egész városra és a fjordra.", emoji: "🎭", lat: 59.9079, lon: 10.7533, day: 1 },
     { id: "munch", title: "MUNCH Múzeum", address: "Edvard Munchs plass 1, 0194 Oslo", description: "A modern, tengerparti felhőkarcoló épület Edvard Munch, a világhírű norvég expresszionista festő műveinek ad otthont. Itt látható többek között az ikonikus 'Sikoly' (The Scream) festmény is.", emoji: "🖼️", lat: 59.9064, lon: 10.7554, day: 1 },
     { id: "akershus", title: "Akershus Erőd", address: "Akershus Festning, 0150 Oslo", description: "A 13. század végén épült középkori vár, amely Oslo védelmére szolgált. Később királyi reneszánsz kastéllyá alakították át. Gyönyörű történelmi falak, bástyák és parkosított sétányok alkotják.", emoji: "🏰", lat: 59.9072, lon: 10.7364, day: 1 },
@@ -394,7 +395,15 @@ function loadState() {
             if (!appState.photos) appState.photos = {};
             if (!appState.checklist) appState.checklist = [...PRESET_CHECKLIST];
             if (!appState.triedFoods) appState.triedFoods = {};
-            if (!appState.sights) appState.sights = [...SIGHTS_DATA];
+            if (!appState.sights) {
+                appState.sights = [...SIGHTS_DATA];
+            } else {
+                SIGHTS_DATA.forEach(defaultSight => {
+                    if (!appState.sights.some(s => s.id === defaultSight.id)) {
+                        appState.sights.unshift(defaultSight);
+                    }
+                });
+            }
         } catch (e) {
             console.error("Nem sikerült betölteni az állapotot", e);
         }
